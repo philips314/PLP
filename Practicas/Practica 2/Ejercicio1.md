@@ -10,6 +10,6 @@ espejar (Right x) = Left x
 - uncurry f (x,y) = f x y
 
  ## I.
- ´´´hs
+ ```
  intercambiar (x,y) = (y,x)
- ´´´
+ ```
