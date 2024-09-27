@@ -21,7 +21,7 @@ Por principio de extensionalidad para pares, basta ver que:
 ∀x :: a. ∀y :: b. intercambiar (intercambiar (x,y)) = (x,y)
 ```
 ```
-intercambiar (intercambiar (x,y)) = *{intercambiar}*
+intercambiar (intercambiar (x,y)) = **{intercambiar}** *hola*
 intercambiar (y,x) = *{intercambiar}*
 (x,y)
 ```
