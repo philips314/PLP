@@ -16,12 +16,12 @@ intercambiar (x,y) = (y,x)
 ```
 ∀p :: (a,b). intercambiar (intercambiar p) = p
 ```
-Por principio de extensionalidad para pares, basta ver que:
+Por principio de **extensionalidad para pares**, basta ver que:
 ```
 ∀x :: a. ∀y :: b. intercambiar (intercambiar (x,y)) = (x,y)
 ```
 ```
-intercambiar (intercambiar (x,y)) = **{intercambiar}** *hola*
+intercambiar (intercambiar (x,y)) = {intercambiar}
 intercambiar (y,x) = *{intercambiar}*
 (x,y)
 ```
