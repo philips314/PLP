@@ -12,7 +12,64 @@
 Indicar si las siguientes propiedades son verdaderas o falsas. Si son verdaderas, realizar una demostración. Si
 son falsas, presentar un contraejemplo.
 
-#I. 
+#I. Verdadero
+Intuitivamente: Indica que si e esta en xs y p(e) entonces e va a estar en filter p xs, ya que filter solo "saca" los elementos que no cumplan p.
 ```
 Eq a => ∀xs::[a]. ∀e::a. ∀p::a->Bool. elem e xs && p e = elem e (filter p xs)
+```
+Por **Induccion estructural sobre listas**, tenemos que:
+
+```
+P(xs): ∀e::a. ∀p::a->Bool. elem e xs && p e = elem e (filter p xs)
+```
+**Caso Base:** `P([])`
+```
+Por un lado:
+elem e [] && p e = {ELEM}
+False && p e = {&&}
+False
+
+Por el otro:
+elem e (filter p []) = {FILTER}
+elem e [] = {ELEM}
+False
+
+(False == False) ==> P([]) vale
+```
+Caso Inductivo: ∀xs::[a]. ∀x::a. P(xs) {HI} => P(x:xs) {TI}
+Asumo que P(xs) vale y qvq P(x:xs) es verdadera.
+Donde:
+P(xs): ∀e::a. elem e xs && p e = elem e (filter p xs) {HI}
+P(x:xs): ∀e::a. elem e (x:xs) && p e = elem e (filter p (x:xs)) {TI}
+
+```
+elem e (filter p (x:xs)) = {FILTER}
+elem e (if p x then x : filter p xs else filter p xs)
+```
+Por **extensionalidad sobre Booleanos**: `p x :: Bool` ==> Puede ser True o False
+**Caso 1:** `p x = False`
+```
+elem e (if p x then x : filter p xs else filter p xs) = {False & if}
+elem e (filter p xs) = {HI}
+elem e xs && p e ????
+```
+**Caso 2:** `p x = True`
+```
+elem e (if p x then x : filter p xs else filter p xs) = {True & if}
+elem e (x: filter p xs) = {ELEM}
+e == x || elem e (filter p xs) 
+```
+Por **extensionalidad sobre Booleanos**: `e == x :: Bool` ==> Puede ser True o False
+**Caso 1:** `e == x = True`
+```
+e == x || elem e (filter p xs) = {True}
+True || elem e (filter p xs) = {||}
+True
+```
+**Caso 2:** `e == x = False`
+```
+e == x || elem e (filter p xs) = {False}
+False || elem e (filter p xs) = {||}
+elem e (filter p xs) = {HI}
+elem e xs && p e
 ```
