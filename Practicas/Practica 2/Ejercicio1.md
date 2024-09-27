@@ -1,5 +1,5 @@
 # Practica 2 / Ejercicio 1 
-## Sean las siguientes defniciones de funciones:
+## Sean las siguientes definiciones de funciones:
 - intercambiar (x,y) = (y,x)
 - espejar (Left x) = Right x
 espejar (Right x) = Left x
@@ -11,9 +11,6 @@ espejar (Right x) = Left x
 
 ## I.
 ```
-intercambiar (x,y) = (y,x)
-```
-```
 ∀p :: (a,b). intercambiar (intercambiar p) = p
 ```
 Por principio de **extensionalidad para pares**, basta ver que:
@@ -24,4 +21,8 @@ Por principio de **extensionalidad para pares**, basta ver que:
 intercambiar (intercambiar (x,y)) = {intercambiar}
 intercambiar (y,x) = *{intercambiar}*
 (x,y)
+```
+## II.
+```
+∀ p:: (a,(b,c)). asociarD (asociarI p) = p
 ```
