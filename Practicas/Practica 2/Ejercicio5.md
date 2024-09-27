@@ -38,7 +38,7 @@ zip' [] ys = {Z'0}
 
 ([] == []) ==> P([]) vale.
 ```
-**Caso Inductivo:** `∀xs::[a]. ∀x::a. P(xs) {HI} => P(x:xs) {TI}`
+**Caso Inductivo:** `∀xs::[a]. ∀x::a. P(xs) {HI} => P(x:xs) {TI}`  
 Asumo que P(xs) vale y qvq P(x:xs) es verdadera.  
 Donde:  
 P(xs): ∀ys::[b]. zip xs ys = zip' xs ys **{HI}**  
