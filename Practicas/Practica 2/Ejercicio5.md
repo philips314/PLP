@@ -13,3 +13,13 @@
 ```
 ### Demostrar que zip = zip' utilizando inducción estructural y el principio de extensionalidad.
 
+Quiero ver que: `zip = zip'`.
+Por principio de extencionalidad funcional basta ver que:
+```
+∀xs :: [a]. P(xs), donde P(xs): ∀ys :: [b]. zip xs ys = zip' xs ys
+```
+Por induccion sobre listas xs...
+```
+P(xs): zip xs ys = zip' xs ys
+```
+**Caso Base:** `P([])`
