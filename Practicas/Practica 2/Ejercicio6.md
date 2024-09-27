@@ -12,7 +12,8 @@
 Indicar si las siguientes propiedades son verdaderas o falsas. Si son verdaderas, realizar una demostración. Si
 son falsas, presentar un contraejemplo.
 
-#I. Verdadero
+# I.  
+Verdadero
 Intuitivamente: Indica que si e esta en xs y p(e) entonces e va a estar en filter p xs, ya que filter solo "saca" los elementos que no cumplan p.
 ```
 Eq a => ∀xs::[a]. ∀e::a. ∀p::a->Bool. elem e xs && p e = elem e (filter p xs)
