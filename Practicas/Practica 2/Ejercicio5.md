@@ -36,5 +36,26 @@ Por el otro:
 zip' [] ys = {Z'0}
 []
 
-[] == [] ==> P([]) vale.
+([] == []) ==> P([]) vale.
+```
+**Caso Inductivo:** `∀xs::[a]. ∀x::a. P(xs) {HI} => P(x:xs) {TI}`
+Asumo que P(xs) vale y qvq P(x:xs) es verdadera.
+Donde: 
+P(xs): ∀ys::[b]. zip xs ys = zip' xs ys **{HI}**
+P(x:xs): ∀ys::[b]. zip (x:xs) ys = zip' (x:xs) ys **{TI}**
+```
+Por un lado:
+zip (x:xs) ys = {Z0}
+foldr ( \x rec ys -> if null ys then [] else (x, head ys) : rec (tail ys) ) (const []) (x:xs) ys = {F1} foldr f z (x:xs) = f x (foldr f z xs)
+( \x rec ys -> if null ys then [] else (x, head ys) : rec (tail ys) ) x ( foldr (\x rec ys -> if null ys then [] else (x, head ys) : rec (tail ys)) (const []) xs) ys = {B}
+     donde x = x, rec = (foldr (\x rec ys -> if null ys then [] else (x, head ys) : rec (tail ys)) (const []) xs) & ys = ys.
+if null ys then [] else (x, head ys) : (foldr (\x rec ys -> if null ys then [] else (x, head ys) : rec (tail ys)) (const []) xs) (tail ys) = {Z0}
+if null ys then [] else (x, head ys) : zip xs (tail ys) = {HI} TENGO DUDAS SOBRE ESTE PROCEDIMIENTO PUES YS != (TAIL YS)
+if null ys then [] else (x, head ys) : zip' xs (tail ys)
+
+Por el otro:
+zip' (x:xs) ys = {Z'1}
+if null ys then [] else (x, head ys) : zip' xs (tail ys)
+
+Llegamos a lo mismo desde los dos lados. ∴P(x:xs) vale, y con ello, vale lo que queriamos probar. 
 ```
