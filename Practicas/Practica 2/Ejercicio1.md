@@ -11,11 +11,11 @@
 
 ## I.
 ```
-∀p :: (a,b). intercambiar (intercambiar p) = p
+∀p::(a,b). intercambiar (intercambiar p) = p
 ```
 Por principio de extensionalidad para pares, basta ver que:
 ```
-∀x :: a. ∀y :: b. intercambiar (intercambiar (x,y)) = (x,y)
+∀x::a. ∀y::b. intercambiar (intercambiar (x,y)) = (x,y)
 ```
 ```
 intercambiar (intercambiar (x,y)) = {intercambiar}
@@ -24,12 +24,18 @@ intercambiar (y,x) = {intercambiar}
 ```
 ## II. ??
 ```
-∀ p:: (a,(b,c)). asociarD (asociarI p) = p
+∀p::(a,(b,c)). asociarD (asociarI p) = p
 ```
 Por principio de extencionalidad para pares, basta ver que: 
 ```
 ∀x::a. ∀y::b. ∀z::c. asociarD (asociarI (x,(y,z))) = (x,(y,z)).
 ```
+```
+asociarD (asociarI (x,(y,z))) = {asociarI}
+asociarD ((x,y),z) = {asociarD}
+(x,(y,z))
+```
+Que es justamente lo que queria probar...
 ## III.
 ```
 ∀p::Either a b. espejar (espejar p) = p
