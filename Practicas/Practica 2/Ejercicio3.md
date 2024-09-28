@@ -26,7 +26,7 @@
 ```
 ∀xs::[a]. length (duplicar xs) = 2 * length xs.
 ```
-Por induccion estructural tenemos dos casos: Base e inductivo
+Por induccion estructural tenemos dos casos: Base e inductivo  
 **Caso Base:** `P([])`
 ```
 length (duplicar []) = {D0}
@@ -39,9 +39,9 @@ length [] = {L0}
 
 P([]) vale
 ```
-**Caso inductivo:** `∀xs::[a]. ∀ x::a. P(xs) {HI} => P(x:xs) {TI}`
-Donde:
-P(xs): length (duplicar xs) = 2 * length xs. {HI}
+**Caso inductivo:** `∀xs::[a]. ∀ x::a. P(xs) {HI} => P(x:xs) {TI}`  
+Donde:  
+P(xs): length (duplicar xs) = 2 * length xs. {HI}  
 P(x:xs): length (duplicar (x:xs)) = 2 * length (x:xs). {TI}
 ```
 length (duplicar (x:xs)) = {D1}
@@ -61,7 +61,7 @@ Llegamos a lo mismo de ambos lados del igual. ∴vale P(x:xs) y se prueba la pro
 ```
 ∀xs::[a]. ∀ys::[a]. length (append xs ys) = length xs + length ys
 ```
-Por induccion estructural sobre xs tenemos dos casos: Base e inductivo
+Por induccion estructural sobre xs tenemos dos casos: Base e inductivo  
 **Caso Base:** `P([])`
 ```
 length (append [] ys) = {A0}
@@ -73,9 +73,9 @@ length ys
 
 P([]) vale
 ```
-**Caso inductivo:** `∀xs::[a]. ∀ x::a. P(xs) {HI} => P(x:xs) {TI}`
-Donde:
-P(xs): length (append xs ys) = length xs + length ys. {HI}
+**Caso inductivo:** `∀xs::[a]. ∀ x::a. P(xs) {HI} => P(x:xs) {TI}`  
+Donde:  
+P(xs): length (append xs ys) = length xs + length ys. {HI}  
 P(x:xs): length (append (x:xs) ys) = length (x:xs) + length ys. {TI}
 ```
 length (append (x:xs) ys) = {A1}
@@ -91,7 +91,7 @@ Llegamos a lo mismo de ambos lados del igual. ∴vale P(x:xs) y se prueba la pro
 ```
 ∀xs::[a]. ∀x::a. [x] ++ xs = x:xs
 ```
-Por induccion estructural sobre xs tenemos dos casos: Base e inductivo
+Por induccion estructural sobre xs tenemos dos casos: Base e inductivo  
 **Caso Base:** `P([])`
 ```
 [x] ++ [] = {++}
@@ -102,9 +102,9 @@ x : [] = {:}
 
 P([]) vale
 ```
-**Caso inductivo:** `∀xs::[a]. ∀ x::a. P(xs) {HI} => P(x:xs) {TI}`
-Donde:
-P(xs): [x] ++ xs = x:xs. {HI}
+**Caso inductivo:** `∀xs::[a]. ∀ x::a. P(xs) {HI} => P(x:xs) {TI}`  
+Donde:  
+P(xs): [x] ++ xs = x:xs. {HI}  
 P(x:xs): [x'] ++ (x:xs) = x':(x:xs). {TI}
 ```
 [x'] ++ (x:xs) = {++}
@@ -119,7 +119,7 @@ Llegamos a lo mismo. ∴vale P(x:xs) y se prueba la propiedad.
 ```
 ∀xs::[a]. ∀f::(a->b). length (map f xs) = length xs
 ```
-Por induccion estructural sobre xs tenemos dos casos: Base e inductivo
+Por induccion estructural sobre xs tenemos dos casos: Base e inductivo  
 **Caso Base:** `P([])`
 ```
 length (map f []) = {M0}
@@ -129,9 +129,9 @@ length []
 
 P([]) vale
 ```
-**Caso inductivo:** `∀xs::[a]. ∀ x::a. P(xs) {HI} => P(x:xs) {TI}`
-Donde:
-P(xs): length (map f xs) = length xs. {HI}
+**Caso inductivo:** `∀xs::[a]. ∀ x::a. P(xs) {HI} => P(x:xs) {TI}`  
+Donde:  
+P(xs): length (map f xs) = length xs. {HI}  
 P(x:xs): length (map f (x:xs)) = length (x:xs). {TI}
 ```
 length (map f (x:xs)) = {M1}
@@ -147,7 +147,7 @@ Llegamos a lo mismo. ∴vale P(x:xs) y se prueba la propiedad.
 ∀xs::[a]. ∀p::a->Bool. ∀e::a. ((elem e (filter p xs)) ⇒ (elem e xs)) (asumiendo Eq a)
 
 ```
-Por induccion estructural sobre xs tenemos dos casos: Base e inductivo
+Por induccion estructural sobre xs tenemos dos casos: Base e inductivo  
 **Caso Base:** `P([])`
 ```
 elem e (filter p []) = {F1}
@@ -156,9 +156,9 @@ False
 
 P([]) vale, pues False ==> ALGO es una implicacion Verdadera
 ```
-**Caso inductivo:** `∀xs::[a]. ∀ x::a. P(xs) {HI} => P(x:xs) {TI}`  
-Donde:  
-P(xs): ((elem e (filter p xs)) ⇒ (elem e xs)). {HI}  
+**Caso inductivo:** `∀xs::[a]. ∀ x::a. P(xs) {HI} => P(x:xs) {TI}`    
+Donde:    
+P(xs): ((elem e (filter p xs)) ⇒ (elem e xs)). {HI}    
 P(x:xs): ((elem e (filter p (x:xs))) ⇒ (elem e (x:xs))). {TI}
 ```
 elem e (filter p (x:xs) = {F1}
