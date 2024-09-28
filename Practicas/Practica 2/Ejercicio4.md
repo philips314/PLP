@@ -29,8 +29,8 @@ P([]) vale
 **Caso Inductivo:** `∀xs::[a]. ∀x::a. P(xs) {HI} => P(x:xs) {TI}`  
 Asumo que P(xs) vale y quiero probar que P(x:xs) vale.  
 Donde:  
-P(xs): (reverse . reverse) xs = id xs.  
-P(x:xs): (reverse . reverse) (x:xs) = id (x:xs).
+P(xs): (reverse . reverse) xs = id xs. {HI}
+P(x:xs): (reverse . reverse) (x:xs) = id (x:xs). {TI}
 
 ```
 (reverse . reverse) (x:xs) = {.}
@@ -71,8 +71,8 @@ P([]) vale
 **Caso Inductivo:** `∀xs::[a]. ∀x::a. P(xs) {HI} => P(x:xs) {TI}`  
 Asumo que P(xs) vale y quiero probar que P(x:xs) vale.  
 Donde:   
-P(xs): append xs ys = (++) xs ys.  
-P(x:xs): append (x:xs) ys = (++) (x:xs) ys.
+P(xs): append xs ys = (++) xs ys. {HI}
+P(x:xs): append (x:xs) ys = (++) (x:xs) ys. {TI}
 ```
 append (x:xs) ys = {A1}
 x : append xs ys = {HI}
@@ -115,8 +115,8 @@ P([]) vale
 **Caso Inductivo:** `∀xs::[a]. ∀x::a. P(xs) {HI} => P(x:xs) {TI}`  
 Asumo que P(xs) vale y quiero probar que P(x:xs) vale.  
 Donde:   
-P(xs): map id xs = id xs.  
-P(x:xs): map id (x:xs) = id (x:xs).
+P(xs): map id xs = id xs. {HI}
+P(x:xs): map id (x:xs) = id (x:xs). {TI}
 ```
 map id (x:xs) = {M1}
 id x : map id xs = {ID}
@@ -126,4 +126,94 @@ x : xs = {ID}
 id (x:xs)
 
 Llegamos a lo mismo. ∴vale P(x:xs) y se prueba la propiedad.
+```
+
+# IV.  
+∀f::a->b. ∀g::b->c. map (g . f) = map g . map f
+```
+{.}: f . g x = f (g x)
+{M0}: map _ [] = []
+{M1}: map f (x:xs) = f x : map f xs
+```
+Por extencionalidad funcional e induccion estructural, basta ver que:  
+```
+∀xs::[a]. P(xs), donde P(xs): ∀f::a->b. ∀g::b->c. map (g . f) xs = map g . map f xs
+``` 
+**Caso Base:** `P([])`
+```
+map (g . f) [] = {M0}
+[]
+
+map g . map f [] = {.}
+map g (map f []) = {M0}
+map g [] = {M0}
+[]
+
+P([]) vale
+```
+**Caso Inductivo:** `∀xs::[a]. ∀x::a. P(xs) {HI} => P(x:xs) {TI}`  
+Asumo que P(xs) vale y quiero probar que P(x:xs) vale.  
+Donde:   
+P(xs): map (g . f) xs = map g . map f xs. {HI} 
+P(x:xs): map (g . f) (x:xs) = map g . map f (x:xs). {TI}
+```
+map (g . f) (x:xs) = {M1}
+(g.f) x : map (g.f) xs = {HI}
+(g.f) x : (map g . map f xs) = {.}
+(g.f) x : map g (map f xs) = {.}
+g (f x) : map g (map f xs)
+
+map g . map f (x:xs) = {.}
+map g (map f x:xs) = {M1}
+map g (f x : map f xs) = {M1}
+g (f x) : map g (map f xs) = {.}
+
+Llegamos a lo mismo de ambos lados del igual. ∴vale P(x:xs) y se prueba la propiedad.
+```
+
+
+# V.  
+∀f::a->b . ∀p::b->Bool. map f . filter (p . f) = filter p . map f.
+```
+{(.)}: (.) f g x = f (g x)
+{M0}:  map _ []     = []
+{M1}:  map f (x:xs) = f x : map f xs
+{F0}:  filter _ []    = []
+{F1}:  filter p (x:xs) = if p x then x : filter p xs else filter p xs
+```
+Por extencionalidad funcional, basta ver que:  
+```
+∀xs::[a]. ∀ys::[a]. append xs ys = (++) xs ys.
+``` 
+Por induccion estructural sobre listas xs, basta con probar que:
+```
+∀xs::[a]. P(xs), donde P(xs): ∀ys::[a]. append xs ys = (++) xs ys.
+```
+**Caso Base:** `P([])`
+```
+append [] ys = {A0}
+ys
+
+(++) [] ys = {++}
+foldr (:) ys [] = {F0}
+ys
+
+P([]) vale
+```
+**Caso Inductivo:** `∀xs::[a]. ∀x::a. P(xs) {HI} => P(x:xs) {TI}`  
+Asumo que P(xs) vale y quiero probar que P(x:xs) vale.  
+Donde:   
+P(xs): append xs ys = (++) xs ys. {HI}
+P(x:xs): append (x:xs) ys = (++) (x:xs) ys. {TI}
+```
+append (x:xs) ys = {A1}
+x : append xs ys = {HI}
+x : (++) xs ys = {++}
+x : xs ++ ys = {:}
+(x:xs) ++ ys
+
+(++) (x:xs) ys = {++}
+(x:xs) ++ ys
+
+Llegamos a lo mismo de ambos lados del igual. ∴vale P(x:xs) y se prueba la propiedad.
 ```
