@@ -73,7 +73,6 @@ flip (flip f) x y = {FLIP}
 flip f y x = {FLIP}
 f x y
 ```
-Que es justamente lo que queria probar...
 ## IV. 
 ```
 ∀f::a->b->c. ∀x::a. ∀y::b. curry (uncurry f) x y = f x y
@@ -87,4 +86,3 @@ curry (uncurry f) x y = {CURRY}
 uncurry f (x,y) = {UNCURRY}
 f x y
 ```
-Que es justamente lo que queria probar...
