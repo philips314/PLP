@@ -28,8 +28,8 @@ P([]) vale
 ```
 **Caso Inductivo:** `∀xs::[a]. ∀x::a. P(xs) {HI} => P(x:xs) {TI}`  
 Asumo que P(xs) vale y quiero probar que P(x:xs) vale.  
-Donde:
-P(xs): (reverse . reverse) xs = id xs.
+Donde:  
+P(xs): (reverse . reverse) xs = id xs.  
 P(x:xs): (reverse . reverse) (x:xs) = id (x:xs).
 
 ```
@@ -72,8 +72,8 @@ P([]) vale
 ```
 **Caso Inductivo:** `∀xs::[a]. ∀x::a. P(xs) {HI} => P(x:xs) {TI}`  
 Asumo que P(xs) vale y quiero probar que P(x:xs) vale.  
-Donde: 
-P(xs): append xs ys = (++) xs ys.
+Donde:   
+P(xs): append xs ys = (++) xs ys.  
 P(x:xs): append (x:xs) ys = (++) (x:xs) ys.
 ```
 append (x:xs) ys = {A1}
