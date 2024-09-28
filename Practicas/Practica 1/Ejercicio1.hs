@@ -21,9 +21,13 @@ dosVeces = \f -> f . f
 
 flipAll :: [a -> b -> c] -> [b -> a -> c]
 flipAll = map flip
--- flip :: (a -> b -> c) -> (b -> a -> c)
+-- flip :: (a -> b -> c) -> b -> a -> c
 -- map :: (a -> b) -> [a] -> [b]
 -- El a del map queda (a -> b -> c) y el b queda (b -> a -> c)
 --Intuitivamente, espera una lista de funciones a las que se les aplica flip (provocando que estas esperen sus argumentos en orden inverso)
 
-- flipRaro = flip flip
+flipRaro :: b -> (a -> b -> c) -> a -> c
+flipRaro = flip flip
+-- flip :: (a -> b -> c) -> b -> a -> c
+-- flip :: (a -> b -> c) -> b -> a -> c
+--a: (a -> b -> c), b: b, c: a -> c
