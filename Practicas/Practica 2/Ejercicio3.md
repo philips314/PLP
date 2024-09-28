@@ -18,6 +18,8 @@
 {R0} reverse = foldl (flip (:)) []
 {F0} foldr _ z []     = z
 {F1} foldr f z (x:xs) = f x (foldr f z xs)
+{M0}: map _ []     = []
+{M1}: map f (x:xs) = f x : map xs
 
 ```
 # I.
@@ -110,6 +112,78 @@ foldr (:) (x:xs) [x'] = {F1}
 (:) x' (foldr (:) (x:xs) []) = {F0}
 (:) x' : (x:xs) = {:}
 x' : (x:xs)
+
+Llegamos a lo mismo. ∴vale P(x:xs) y se prueba la propiedad.
+```
+# IV.
+```
+∀xs::[a]. ∀f::(a->b). length (map f xs) = length xs
+```
+Por induccion estructural sobre xs tenemos dos casos: Base e inductivo
+**Caso Base:** `P([])`
+```
+length (map f []) = {M0}
+length [] = {L0}
+0 = {L0}
+length []
+
+P([]) vale
+```
+**Caso inductivo:** `∀xs::[a]. ∀ x::a. P(xs) {HI} => P(x:xs) {TI}`
+Donde:
+P(xs): length (map f xs) = length xs. {HI}
+P(x:xs): length (map f (x:xs)) = length (x:xs). {TI}
+```
+length (map f (x:xs)) = {M1}
+length (f x : map f xs) = {L1}
+1 + lenght (map f xs) = {HI}
+1 + length xs = {DEF LENGTH}
+length (x:xs)
+
+Llegamos a lo mismo. ∴vale P(x:xs) y se prueba la propiedad.
+```
+# V.
+```
+∀xs::[a]. ∀p::a->Bool. ∀e::a. ((elem e (filter p xs)) ⇒ (elem e xs)) (asumiendo Eq a)
+
+```
+Por induccion estructural sobre xs tenemos dos casos: Base e inductivo
+**Caso Base:** `P([])`
+```
+elem e (filter p []) = {F1}
+elem e [] = {ELEM}
+False
+
+P([]) vale, pues False ==> ALGO es una implicacion Verdadera
+```
+**Caso inductivo:** `∀xs::[a]. ∀ x::a. P(xs) {HI} => P(x:xs) {TI}`
+Donde:
+P(xs): ((elem e (filter p xs)) ⇒ (elem e xs)). {HI}
+P(x:xs): ((elem e (filter p (x:xs))) ⇒ (elem e (x:xs))). {TI}
+```
+elem e (filter p (x:xs) = {F1}
+elem e (if p x then x : filter p xs else filter p xs)
+Por extensionalidad de booleanos, tengo dos casos: p x = True o p x = False
+{1} p x = True
+     elem e (if p x then x : filter p xs else filter p xs) = {True & if}
+     elem e (x : filter p xs) = {ELEM}
+     e == x || elem e filter p xs
+     Por extensionalidad de booleanos y (||) tengo dos casos:
+     {2.1} e == x = True
+           e == x || elem e filter p xs = {True}
+           True ||  elem e filter p xs = {||}
+           True ==> Si e pertenece a la lista (x:xs) "filtrada", tambien pertenece a la lista (x:xs) original.
+     {2.2} e == x = False
+           e == x || elem e filter p xs = {False}
+           False || elem e filter p xs = {||}
+           elem e filter p xs = {HI}
+           ((elem e (filter p xs)) ⇒ (elem e xs))
+{2} p x = False
+     elem e (if p x then x : filter p xs else filter p xs) = {False & if}
+     elem e (filter p xs) = {HI}
+     ((elem e (filter p xs)) ⇒ (elem e xs))
+          Si ((elem e (filter p xs)) = True ==> Significa que e pertenece a la lista filtrada, por lo tanto, e pertenece a la lista original
+          
 
 Llegamos a lo mismo. ∴vale P(x:xs) y se prueba la propiedad.
 ```
