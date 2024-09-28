@@ -242,3 +242,49 @@ Por extensionalidad de booleanos hay 2 casos:
 
 Llegamos a lo mismo de ambos lados del igual. ∴vale P(x:xs) y se prueba la propiedad.
 ```
+# VI. ???
+∀f::a->b. ∀e::a. ∀xs::[a]. ((elem e xs) ⇒ (elem (f e) (map f xs)))  (asumiendo Eq a y Eq b)
+```
+{E0}: elem e [] = False
+{E1}: elem e (x:xs) = e == x || elem e xs
+{M0}: map _ [] = []
+{M1}: map f (x:xs) = f x : map f xs
+```
+Por extencionalidad funcional e induccion estructural sobre listas xs, basta ver que:  
+```
+∀xs::[a]. P(xs), donde P(xs): ∀f::a->b. ∀e::a. ((elem e xs) ⇒ (elem (f e) (map f xs)))
+``` 
+**Caso Base:** `P([])`
+```
+((elem e []) = {E0}
+False, y con esto sabemos que vale la implicacion 
+P([]) vale
+```
+**Caso Inductivo:** `∀xs::[a]. ∀x::a. P(xs) {HI} => P(x:xs) {TI}`  
+Asumo que P(xs) vale y quiero probar que P(x:xs) vale.  
+Donde:   
+P(xs): ((elem e xs) ⇒ (elem (f e) (map f xs))). {HI} 
+P(x:xs): ((elem e (x:xs)) ⇒ (elem (f e) (map f (x:xs)))). {TI}
+```
+elem e (x:xs) {E1}
+e == x || elem e xs
+Por extencionalidad de Booleanos, hay cuatro casos:
+e == x = True ∧ elem e xs = True
+  e == x || elem e xs = {True}
+  True || True = {||}
+  True
+e == x = False ∧ elem e xs = True
+  e == x || elem e xs = {False ∧ True}
+  False || True = {||}
+  True 
+e == x = True ∧ elem e xs = False
+  e == x || elem e xs = {True ∧ False}
+  True || False = {||}
+  True
+e == x = False ∧ elem e xs = False
+  e == x || elem e xs = {False ∧ False}
+  False || False
+
+?????
+Llegamos a lo mismo de ambos lados del igual. ∴vale P(x:xs) y se prueba la propiedad.
+```
