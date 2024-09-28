@@ -16,6 +16,8 @@
 {P0} ponerAlFinal x = foldr (:) (x:[])
      reverse :: [a] -> [a]
 {R0} reverse = foldl (flip (:)) []
+{F0} foldr _ z []     = z
+{F1} foldr f z (x:xs) = f x (foldr f z xs)
 
 ```
 # I.
@@ -82,4 +84,32 @@ length (x:xs) + length ys = {L1}
 1 + length xs + length ys
 
 Llegamos a lo mismo de ambos lados del igual. ∴vale P(x:xs) y se prueba la propiedad.
+```
+# III.
+```
+∀xs::[a]. ∀x::a. [x] ++ xs = x:xs
+```
+Por induccion estructural sobre xs tenemos dos casos: Base e inductivo
+**Caso Base:** `P([])`
+```
+[x] ++ [] = {++}
+[x]
+
+x : [] = {:}
+[x]
+
+P([]) vale
+```
+**Caso inductivo:** `∀xs::[a]. ∀ x::a. P(xs) {HI} => P(x:xs) {TI}`
+Donde:
+P(xs): [x] ++ xs = x:xs. {HI}
+P(x:xs): [x'] ++ (x:xs) = x':(x:xs). {TI}
+```
+[x'] ++ (x:xs) = {++}
+foldr (:) (x:xs) [x'] = {F1}
+(:) x' (foldr (:) (x:xs) []) = {F0}
+(:) x' : (x:xs) = {:}
+x' : (x:xs)
+
+Llegamos a lo mismo. ∴vale P(x:xs) y se prueba la propiedad.
 ```
