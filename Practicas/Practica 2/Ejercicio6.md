@@ -74,3 +74,33 @@ False || elem e (filter p xs) = {||}
 elem e (filter p xs) = {HI}
 elem e xs && p e
 ```
+???
+
+# V.  
+Falso.  
+Intuitivamente, pueden haber elementos repetidos entre las listas. El lado izq las toma en cuenta para evitarlas, y el lado derecho las incluye.
+```
+Eq a => ∀xs::[a]. ∀ys::[a]. length (union xs ys) = length xs + length ys
+```
+**Contraejemplo:**
+```
+xs = [2] ys = [2]
+
+length (union [2] [2]) = {U0}
+length (nub [2]++[2]) = {++}
+length (nub [2,2]) = {N1} nub (x:xs) = x : filter (\y -> x /= y) (nub xs)
+length (2 : filter (\y -> 2 /= y) (nub [2])) = {N1}
+length (2 : filter (\y -> 2 /= y) (2 : filter (\y -> 2 /= y) (nub []))) = {N0}
+length (2 : filter (\y -> 2 /= y) (2 : filter (\y -> 2 /= y) [])) = {FILTER}
+length (2 : filter (\y -> 2 /= y) (2 : [])) = {:}
+length (2 : filter (\y -> 2 /= y) [2])) = {FILTER pues 2 /= 2 es False}
+length (2 : [])) = {:}
+length [2] = {LENGTH}
+1
+
+length [2] + length [1] = {LENGTH}
+1 + 1 = {INT}
+2
+
+1 != 2 ==> La afirmacion es Falsa.
+```
