@@ -173,7 +173,7 @@ Llegamos a lo mismo de ambos lados del igual. ∴vale P(x:xs) y se prueba la pro
 
 
 # V.  
-∀f::a->b . ∀p::b->Bool. map f . filter (p . f) = filter p . map f.
+∀f::a->b. ∀p::b->Bool. map f . filter (p . f) = filter p . map f.
 ```
 {(.)}: (.) f g x = f (g x)
 {M0}:  map _ []     = []
@@ -181,39 +181,64 @@ Llegamos a lo mismo de ambos lados del igual. ∴vale P(x:xs) y se prueba la pro
 {F0}:  filter _ []    = []
 {F1}:  filter p (x:xs) = if p x then x : filter p xs else filter p xs
 ```
-Por extencionalidad funcional, basta ver que:  
+Por extencionalidad funcional e induccion sobre listas xs, basta ver que:  
 ```
-∀xs::[a]. ∀ys::[a]. append xs ys = (++) xs ys.
-``` 
-Por induccion estructural sobre listas xs, basta con probar que:
-```
-∀xs::[a]. P(xs), donde P(xs): ∀ys::[a]. append xs ys = (++) xs ys.
+∀xs::[a]. P(xs), donde P(xs): ∀f::a->b. ∀p::b->Bool. map f . filter (p . f) xs = filter p . map f xs.
 ```
 **Caso Base:** `P([])`
 ```
-append [] ys = {A0}
-ys
+map f . filter (p . f) [] = {.}
+map f (filter (p.f) [] ) = {F0}
+map f [] = {M0}
+[]
 
-(++) [] ys = {++}
-foldr (:) ys [] = {F0}
-ys
+filter p . map f [] = {.}
+filter p (map f []) = {M0}
+filter p [] = {F0}
+[]
 
 P([]) vale
 ```
 **Caso Inductivo:** `∀xs::[a]. ∀x::a. P(xs) {HI} => P(x:xs) {TI}`  
 Asumo que P(xs) vale y quiero probar que P(x:xs) vale.  
 Donde:   
-P(xs): append xs ys = (++) xs ys. {HI}
-P(x:xs): append (x:xs) ys = (++) (x:xs) ys. {TI}
+P(xs): map f . filter (p . f) xs = filter p . map f xs. {HI}
+P(x:xs): map f . filter (p . f) (x:xs) = filter p . map f (x:xs). {TI}
 ```
-append (x:xs) ys = {A1}
-x : append xs ys = {HI}
-x : (++) xs ys = {++}
-x : xs ++ ys = {:}
-(x:xs) ++ ys
+map f . filter (p . f) (x:xs) = {.}
+map f (filter (p.f) x:xs ) = {F1}
+map f (if (p.f) x then x : filter (p.f) xs else filter (p.f) xs) = {.}
+map f (if p (f x) then x : filter (p.f) xs else filter (p.f) xs)
 
-(++) (x:xs) ys = {++}
-(x:xs) ++ ys
+filter p . map f (x:xs) = {.}
+filter p (map f x:xs) = {M1}
+filter p (f x : map f xs) = {F1}
+if p (f x) then (f x) : filter p (map f xs) else filter p (map f xs) = {.}
+if p (f x) then (f x) : (filter p . map f xs) else (filter p . map f) xs
+
+Por extensionalidad de booleanos hay 2 casos:
+
+  (p.f) x = True
+
+    map f (if (p.f) x then x : filter (p.f) xs else filter (p.f) xs) = {(p.f) x = True}
+    map f (x : filter (p.f) xs) = {M1}
+    f x : map f (filter (p.f) xs) = {.}
+    f x : map f . filter (p . f) xs 
+
+    if p (f x) then (f x) : (filter p . map f xs) else (filter p . map f) xs = { p (f x) = True}
+    f x : (filter p . map f xs) = {HI}
+    f x : map f . filter (p . f) xs
+
+  (p.f) x = False
+
+    map f (if (p.f) x then x : filter (p.f) xs else filter (p.f) xs) = {(p.f) x = False}
+    map f (filter (p.f) xs) = {.}
+
+    if p (f x) then (f x) : (filter p . map f xs) else (filter p . map f) xs = {(p.f) x = False}
+    (filter p . map f) xs = {HI}
+    map f . filter (p . f) xs = {.}
+    map f (filter (p.f) xs)
+
 
 Llegamos a lo mismo de ambos lados del igual. ∴vale P(x:xs) y se prueba la propiedad.
 ```
