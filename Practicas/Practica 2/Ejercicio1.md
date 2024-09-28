@@ -19,7 +19,7 @@ Por principio de **extensionalidad para pares**, basta ver que:
 ```
 ```
 intercambiar (intercambiar (x,y)) = {intercambiar}
-intercambiar (y,x) = *{intercambiar}*
+intercambiar (y,x) = {intercambiar}
 (x,y)
 ```
 ## II.
