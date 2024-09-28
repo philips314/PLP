@@ -20,6 +20,10 @@
 {F1} foldr f z (x:xs) = f x (foldr f z xs)
 {M0}: map _ []     = []
 {M1}: map f (x:xs) = f x : map xs
+{FL0}: foldl _ z [] = z
+{FL1}: foldl f z (x:xs) = foldl f (f z x) xs
+{F}: flip f x y = f y x
+{RE}: reverse = foldl (flip (:)) []
 
 ```
 # I.
@@ -212,6 +216,43 @@ P([]) vale
 **Caso inductivo:** `∀xs::[a]. ∀ x::a. P(xs) {HI} => P(x:xs) {TI}`  
 Donde:  
 P(xs): ponerAlFinal x xs = xs ++ (x:[]). {HI}  
+P(x:xs): ponerAlFinal x (x:xs) = (x:xs) ++ (x:[]). {TI}
+```
+ponerAlFinal x (x:xs) = {P0}
+foldr (:) (x':[]) (x:xs) = {:}
+foldr (:) [x'] (x:xs) = {F1}
+(:) x (foldr (:) [x'] xs) = {:}
+x : (foldr (:) [x'] xs)
+
+(x:xs) ++ (x':[]) = {:}
+(x:xs) ++ [x'] = {++}
+foldr (:) [x'] (x:xs) = {F1}
+(:) x (foldr (:) [x'] xs) = {:}
+x : (foldr (:) [x'] xs)
+
+Llegamos a lo mismo de ambos lados del igual. ∴vale P(x:xs) y se prueba la propiedad.
+```
+# VII.
+```
+reverse = foldr (\x rec -> rec ++ (x:[])) []
+```
+Por extensionalidad funcional, basta ver que ∀ys::[a]. P(ys), donde P(ys): reverse ys = foldr (\x rec -> rec ++ (x:[])) [] ys
+Por induccion estructural sobre xs tenemos dos casos: Base e inductivo  
+**Caso Base:** `P([])`
+```
+reverse [] = {RE}
+foldr (\x rec -> rec ++ (x:[])) [] [] = {FR0}
+[]
+
+foldr (\x rec -> rec ++ (x:[])) [] [] = {FR0}
+[]
+
+P([]) vale
+```
+????
+**Caso inductivo:** `∀xs::[a]. ∀ x::a. P(xs) {HI} => P(x:xs) {TI}`  
+Donde:  
+P(xs): reverse xs = foldr (\x rec -> rec ++ (x:[])) [] xs. {HI}  
 P(x:xs): ponerAlFinal x (x:xs) = (x:xs) ++ (x:[]). {TI}
 ```
 ponerAlFinal x (x:xs) = {P0}
