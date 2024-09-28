@@ -192,3 +192,39 @@ Por extensionalidad de booleanos, tengo dos casos: p x = True o p x = False
 
 Llegamos a lo mismo. ∴vale P(x:xs) y se prueba la propiedad.
 ```
+# VI.
+```
+∀xs::[a]. ∀x::a. ponerAlFinal x xs = xs ++ (x:[])
+```
+Por induccion estructural sobre xs tenemos dos casos: Base e inductivo  
+**Caso Base:** `P([])`
+```
+ponerAlFinal x [] = {P0}
+foldr (:) (x:[]) [] = {F0}
+[x]
+
+[] ++ (x:[]) = {:}
+[] ++ ([x]) = {++}
+[x]
+
+P([]) vale
+```
+**Caso inductivo:** `∀xs::[a]. ∀ x::a. P(xs) {HI} => P(x:xs) {TI}`  
+Donde:  
+P(xs): ponerAlFinal x xs = xs ++ (x:[]). {HI}  
+P(x:xs): ponerAlFinal x (x:xs) = (x:xs) ++ (x:[]). {TI}
+```
+ponerAlFinal x (x:xs) = {P0}
+foldr (:) (x':[]) (x:xs) = {:}
+foldr (:) [x'] (x:xs) = {F1}
+(:) x (foldr (:) [x'] xs) = {:}
+x : (foldr (:) [x'] xs)
+
+(x:xs) ++ (x':[]) = {:}
+(x:xs) ++ [x'] = {++}
+foldr (:) [x'] (x:xs) = {F1}
+(:) x (foldr (:) [x'] xs) = {:}
+x : (foldr (:) [x'] xs)
+
+Llegamos a lo mismo de ambos lados del igual. ∴vale P(x:xs) y se prueba la propiedad.
+```
