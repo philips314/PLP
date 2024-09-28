@@ -156,9 +156,9 @@ False
 
 P([]) vale, pues False ==> ALGO es una implicacion Verdadera
 ```
-**Caso inductivo:** `∀xs::[a]. ∀ x::a. P(xs) {HI} => P(x:xs) {TI}`
-Donde:
-P(xs): ((elem e (filter p xs)) ⇒ (elem e xs)). {HI}
+**Caso inductivo:** `∀xs::[a]. ∀ x::a. P(xs) {HI} => P(x:xs) {TI}`  
+Donde:  
+P(xs): ((elem e (filter p xs)) ⇒ (elem e xs)). {HI}  
 P(x:xs): ((elem e (filter p (x:xs))) ⇒ (elem e (x:xs))). {TI}
 ```
 elem e (filter p (x:xs) = {F1}
@@ -180,9 +180,14 @@ Por extensionalidad de booleanos, tengo dos casos: p x = True o p x = False
            ((elem e (filter p xs)) ⇒ (elem e xs))
 {2} p x = False
      elem e (if p x then x : filter p xs else filter p xs) = {False & if}
-     elem e (filter p xs) = {HI}
-     ((elem e (filter p xs)) ⇒ (elem e xs))
-          Si ((elem e (filter p xs)) = True ==> Significa que e pertenece a la lista filtrada, por lo tanto, e pertenece a la lista original
+     - elem e (filter p xs) 
+     (elem e (x:xs)) = {ELEM}
+     - e == x || elem e xs
+     Tengo: elem e (filter p xs) ==> e == x || elem e xs
+          Si ((elem e (filter p xs)) = False ==> Se cumple la implicacion.
+          Si ((elem e (filter p xs)) = True ==> Hay que ver que pasa con e == x || elem e xs
+               Si e == x es True, la implicacion es verdadera (por ||)
+               Si e == x es False, queda probado por HI que: elem e (filter p xs) ==> elem e xs
           
 
 Llegamos a lo mismo. ∴vale P(x:xs) y se prueba la propiedad.
