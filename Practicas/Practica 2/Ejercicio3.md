@@ -236,7 +236,7 @@ Llegamos a lo mismo de ambos lados del igual. ∴vale P(x:xs) y se prueba la pro
 ```
 reverse = foldr (\x rec -> rec ++ (x:[])) []
 ```
-Por extensionalidad funcional, basta ver que ∀ys::[a]. P(ys), donde P(ys): reverse ys = foldr (\x rec -> rec ++ (x:[])) [] ys
+Por extensionalidad funcional, basta ver que ∀ys::[a]. P(ys), donde P(ys): reverse ys = foldr (\x rec -> rec ++ (x:[])) [] ys  
 Por induccion estructural sobre xs tenemos dos casos: Base e inductivo  
 **Caso Base:** `P([])`
 ```
