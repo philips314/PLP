@@ -77,8 +77,6 @@ Que es justamente lo que queria probar...
 ## IV. 
 ```
 ∀f::a->b->c. ∀x::a. ∀y::b. curry (uncurry f) x y = f x y
-{C} curry f x y = f (x,y)
-{U} uncurry f (x,y) = f x y
 ```
 Por principio de extencionalidad funcional, basta ver que: 
 ```
