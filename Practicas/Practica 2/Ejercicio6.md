@@ -68,7 +68,7 @@ False || elem e (filter p xs) = {||}
 elem e (filter p xs) = {HI}
 elem e xs && p e
 ```
-???
+???  
 #II.
 ```
 Eq a => ∀xs::[a]. ∀e::a. elem e xs = elem e (nub xs)
@@ -92,7 +92,7 @@ P([]) vale
 ```
 **Caso Inductivo:** ∀xs::[a]. ∀x::a. P(xs) {HI} => P(x:xs) {TI}  
 Asumo que P(xs) vale y quiero probar que P(x:xs) vale.  
-Donde:
+Donde:  
 P(xs): elem e xs = elem e (nub xs). {HI}  
 P(x:xs): elem e (x:xs) = elem e (nub (x:xs). {TI}
 ```
