@@ -73,7 +73,7 @@ flip (flip f) x y = {FLIP}
 flip f y x = {FLIP}
 f x y
 ```
-## IV. 
+## V. 
 ```
 ∀f::a->b->c. ∀x::a. ∀y::b. curry (uncurry f) x y = f x y
 ```
