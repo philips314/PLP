@@ -1,5 +1,5 @@
 # Practica 2 / Ejercicio 9 
-## Dadas las funciones altura y cantNodos defnidas en la práctica 1 para árboles binarios, demostrar la siguiente propiedad:
+## Dadas las funciones altura y cantNodos definidas en la práctica 1 para árboles binarios, demostrar la siguiente propiedad:
 ```
 ∀ x::AB a. altura x ≤ cantNodos x
 ```
