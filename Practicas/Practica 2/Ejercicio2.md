@@ -15,7 +15,8 @@ Por principio de extensionalidad funcional, basta ver que:
 flip . flip f x y = {.}
 flip (flip f x y) = {F}
 flip (f y x) = {F}
-f x y
+f x y = {ID}
+id f x y
 ```
 ## II.  
 ∀f::(a,b)->c. uncurry (curry f) = f
@@ -54,7 +55,7 @@ Por el otro:
   y
 ```
 Que es igual por los dos lados...
-## IV. ???
+## IV.
 ∀f::a->b. ∀g::b->c. ∀h::c->d. ((h . g) . f) = (h . (g . f))
 ```
 {.}: (f . g) x = f (g x)
@@ -73,4 +74,4 @@ Por el otro:
   h ((g.f) x) = {.}
   h (g (f x))
 ```
-Que es igual por los dos lados...
+Llegue a lo mismo por los dos lados...
