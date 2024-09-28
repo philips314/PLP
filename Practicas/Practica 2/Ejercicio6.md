@@ -69,7 +69,7 @@ elem e (filter p xs) = {HI}
 elem e xs && p e
 ```
 ???  
-#II.
+# II.
 ```
 Eq a => ∀xs::[a]. ∀e::a. elem e xs = elem e (nub xs)
 ```
