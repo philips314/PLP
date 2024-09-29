@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/31a17f3a-cf44-419a-a05e-23061b9f61f9)# Ejercicios de la clase de Sistemas Deductivos  
+# Ejercicios de la clase de Sistemas Deductivos  
 ![Machete](Imagenes/machete.png)
 ## I.  
 Demostrar ¬(P ⇒ (Q ⇒ P)) FORM.
