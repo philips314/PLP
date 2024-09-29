@@ -12,7 +12,7 @@ P FORM   (Q ⇒ P) FORM
 --------------- F¬
 ¬(P ⇒ (Q ⇒ P))
 ```
-## II.  
+## I. Conjuncion.  
 Dar derivacion de P ∧ Q ⊢ Q ∧ P.  
 ```
 -------------ax     -------------ax
@@ -22,7 +22,7 @@ P ∧ Q ⊢ Q           P ∧ Q ⊢ P
 --------------------------------∧i
 P ∧ Q ⊢ Q ∧ P
 ```
-## III.  
+## II. Conjuncion.  
 Dar una derivación de P ∧ (Q ∧ R) ⊢ (P ∧ Q) ∧ R
 ```
                               -------------------------ax
@@ -35,4 +35,24 @@ P ∧ (Q ∧ R) ⊢ P               P ∧ (Q ∧ R) ⊢ Q                      P
 P ∧ (Q ∧ R) ⊢ (P ∧ Q)                                              P ∧ (Q ∧ R) ⊢ R
 ------------------------------------------------------------------------------ ∧i
 P ∧ (Q ∧ R) ⊢ (P ∧ Q) ∧ R
+```
+## I. Implicacion.  
+Dar una derivación de ⊢ P ⇒ P
+```
+------ax
+P ⊢ P
+---------⇒i
+⊢ P ⇒ P
+```
+## II. Implicacion.  
+Dar una derivación de ⊢ P ⇒ Q ⇒ (Q ∧ P)  
+```
+---------ax     --------ax
+P, Q ⊢ Q        P, Q ⊢ P
+-----------------------------∧i
+P, Q ⊢ (Q ∧ P)
+-----------------------------⇒i
+P ⊢ (Q ⇒ (Q ∧ P)) 
+-----------------------------⇒i
+⊢ P ⇒ (Q ⇒ (Q ∧ P)) 
 ```
