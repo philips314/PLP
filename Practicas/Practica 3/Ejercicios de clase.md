@@ -1,4 +1,4 @@
-# Ejercicios de la clase de Sistemas Deductivos  
+![image](https://github.com/user-attachments/assets/31a17f3a-cf44-419a-a05e-23061b9f61f9)# Ejercicios de la clase de Sistemas Deductivos  
 ![Machete](Imagenes/machete.png)
 ## I.  
 Demostrar ¬(P ⇒ (Q ⇒ P)) FORM.
@@ -66,4 +66,34 @@ P ⇒ Q, Q ⇒ R, P ⊢ P ⇒ R       P ⇒ Q, Q ⇒ R, P ⊢ P
 P ⇒ Q, Q ⇒ R, P ⊢ R
 ------------------------------------------------------------⇒i
 P ⇒ Q, Q ⇒ R ⊢ P ⇒ R
+```
+## I. Disyunción.
+Dar una derivación de ⊢ P ⇒ (P ∨ P)
+```
+-----ax   
+P ⊢ P      
+-----------------Vi1 
+P ⊢ (P ∨ P)     
+-----------------⇒i
+⊢ P ⇒ (P ∨ P)
+```
+## II. Disyunción.
+Dar una derivacióon de ⊢ (P ∨ P) ⇒ P
+```
+---------------ax         ---------------ax      ---------------ax
+(P ∨ P) ⊢ P V P           (P ∨ P), P ⊢ P         (P V P), P ⊢ P
+------------------------------------------------------------------Ve
+(P ∨ P) ⊢ P
+-----------------⇒i
+⊢ (P ∨ P) ⇒ P
+```
+## III. Disyunción.  
+Dar una derivación de P ∨ Q ⊢ Q ∨ P
+```
+                  -------------ax      -------------ax
+                  P ∨ Q, P ⊢ P         P ∨ Q, Q ⊢ Q
+-------------ax   ----------------Vi2  -------------------Vi1
+P ∨ Q ⊢ P V Q     P ∨ Q, P ⊢ Q V P     P ∨ Q, Q ⊢ Q V P
+-----------------------------------------------------------Ve
+P ∨ Q ⊢ Q ∨ P
 ```
