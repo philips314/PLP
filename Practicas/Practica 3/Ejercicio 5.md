@@ -19,3 +19,32 @@ asdas
 ----------------- ⇒i
 ⊢ (ρ ⇒ ⊥) ⇒ ¬ρ 
 ```
+## III. Introducción de la doble negación: ρ ⇒ ¬¬ρ  
+```
+---------ax  ----------ax
+P, ¬P ⊢ P    P, ¬P ⊢ ¬P
+------------------------ ¬e
+P, ¬P ⊢ ⊥
+------------- ¬i
+ρ ⊢ ¬¬ρ  
+----------- ⇒i
+⊢ ρ ⇒ ¬¬ρ  
+```
+## IV. Eliminación de la triple negación: ¬¬¬ρ ⇒ ¬ρ  
+```
+-----------Vale por ejercicio anterior...
+⊢ P ⇒ ¬¬P 
+------------ W           -----ax
+P ⊢ P ⇒ ¬¬P              P ⊢ P
+-------------------------------- ⇒e
+P ⊢ ¬¬P 
+-------------W     --------------ax
+¬¬¬P, P ⊢ ¬¬P      ¬¬¬P, P ⊢ ¬¬¬P
+--------------------------------- ¬e
+¬¬¬P, P ⊢ ⊥
+------------- ¬i
+¬¬¬ρ ⊢ ¬ρ 
+----------- ⇒i
+⊢ ¬¬¬ρ ⇒ ¬ρ  
+```
+Obs: Utilizo la regla W teniendo en cuenta el ejericio anterior, en donde probe que ρ ⊢ ¬¬ρ es derivable. Y en el otro caso, hago referencia a que probe que ⊢ ρ ⇒ ¬¬ρ es derivable. 
