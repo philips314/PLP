@@ -97,7 +97,7 @@ P ∨ Q ⊢ P V Q     P ∨ Q, P ⊢ Q V P     P ∨ Q, Q ⊢ Q V P
 -----------------------------------------------------------Ve
 P ∨ Q ⊢ Q ∨ P
 ```
-## I. Falsedad  
+## I. Falsedad.  ??
 Dar una derivación de (P ∨ Q) ⇒ ⊥ ⊢ P ⇒ Q
 ```
 ---------ax
@@ -110,4 +110,9 @@ Dar una derivación de (P ∨ Q) ⇒ ⊥ ⊢ P ⇒ Q
 (P ∨ Q) ⇒ ⊥, P ⊢ Q 
 -----------------------⇒i
 (P ∨ Q) ⇒ ⊥ ⊢ P ⇒ Q
+```
+## II. Falsedad.  
+Dar una derivación de (P ∧ Q) ⇒ ⊥ ⊢ P ⇒ Q ⇒ R
+```
+(P ∧ Q) ⇒ ⊥ ⊢ P ⇒ Q ⇒ R
 ```
