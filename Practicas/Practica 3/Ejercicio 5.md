@@ -47,4 +47,13 @@ P ⊢ ¬¬P
 ----------- ⇒i
 ⊢ ¬¬¬ρ ⇒ ¬ρ  
 ```
-Obs: Utilizo la regla W teniendo en cuenta el ejericio anterior, en donde probe que ρ ⊢ ¬¬ρ es derivable. Y en el otro caso, hago referencia a que probe que ⊢ ρ ⇒ ¬¬ρ es derivable. 
+Obs: Utilizo la regla W teniendo en cuenta el ejericio anterior, en donde probe que ρ ⊢ ¬¬ρ es derivable. Y en el otro caso, hago referencia a que probe que ⊢ ρ ⇒ ¬¬ρ es derivable.  
+## V. Contraposición: (ρ ⇒ σ) ⇒ (¬σ ⇒ ¬ρ)  
+```
+```
+## VI. Adjunción: ((ρ ∧ σ) ⇒ τ ) ⇔ (ρ ⇒ σ ⇒ τ )  
+```
+```
+## VII. de Morgan (I): ¬(ρ ∨ σ) ⇔ (¬ρ ∧ ¬σ)
+```
+```
