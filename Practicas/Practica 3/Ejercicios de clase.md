@@ -1,5 +1,6 @@
 # Ejercicios de la clase de Sistemas Deductivos  
-![Machete Logica](Imagenes/image.png)
+![Machete Logica](Imagenes/image.png)  
+*Si del contexto Γ se deduce t y del Γ se deduce o, entonces por ∧i implica lo de abajo.  ⇒e := Modus ponens*
 ![Machete Definiciones Basicas](Imagenes/machete.png)
 ## I.  
 Demostrar ¬(P ⇒ (Q ⇒ P)) FORM.
