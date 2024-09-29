@@ -1,5 +1,6 @@
 # Ejercicios de la clase de Sistemas Deductivos  
-![Machete](Imagenes/machete.png)
+![Machete Definiciones Basicas](Imagenes/machete.png)
+![Machete Logica](Imagenes/image.png)
 ## I.  
 Demostrar ¬(P ⇒ (Q ⇒ P)) FORM.
 ```
