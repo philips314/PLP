@@ -72,12 +72,6 @@ Obs: Utilizo la regla W teniendo en cuenta el ejericio anterior, en donde probe 
 ## VIII. de Morgan (I): ¬(ρ ∧ σ) ⇔ (¬ρ ∨ ¬σ) 
 (⇒) Falta ver la vuelta...
 ```
-
-
-
-
-
-
                                                           -------------------- ax
                             Sigo este caso Abajo           ¬(ρ ∧ σ), ¬p ⊢ ¬ρ
 ------------------LEM    ------------------------(*)      ------------------------- Vi1
@@ -88,13 +82,6 @@ Obs: Utilizo la regla W teniendo en cuenta el ejericio anterior, en donde probe 
 ⊢ ¬(ρ ∧ σ) ⇒ (¬ρ V ¬σ)  
 ```
 ```
-
-
-
-
-
-
-
                              -----------------ax  -------------------ax
                              ¬(ρ ∧ σ), p, σ ⊢ p   ¬(ρ ∧ σ), p, σ ⊢ σ
                              ----------------------------------------∧i       ------------------------ax
