@@ -15,7 +15,7 @@ $\checkmark$ es sintácticamente válida pero no tipa.
 ## g. λx.isZero(x)  
 $\times$ No es valido, a x le falta el tipo.  
 ## h. λx: σ. succ(x)  
-$\times$   
+$\times$ No es valido, σ es un tipo cualquiera.
 ## i. λx: Bool. succ(x)  
 $\checkmark$ es sintácticamente válida pero no tipa.  
 ## j. λx: if true then Bool else Nat. x  
