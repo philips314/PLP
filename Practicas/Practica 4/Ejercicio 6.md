@@ -32,10 +32,9 @@ NO TIPA                                                    ∅ ⊢ zero: Nat
 ## d. x : Bool → Nat, y : Bool ⊢ x y : Nat  
 ```
 
-
-
-
-
+------------------------------------------t-VAR       ----------------------------------t-VAR
+x : Bool → Nat, y : Bool ⊢ x: Bool -> Nat             x : Bool → Nat, y : Bool ⊢ y: Bool
+------------------------------------------------------------------------------------------ t-APP
 x : Bool → Nat, y : Bool ⊢ x y : Nat
 ```
 
