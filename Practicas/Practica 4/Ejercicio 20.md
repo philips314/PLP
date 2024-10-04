@@ -35,11 +35,22 @@ V. Currificación: ((σ × τ) → ρ) → (σ → τ → ρ) y (σ → τ → �
 ```
 ## c. Cómo se extiende el conjunto de los valores?  
 ```
-asd
+...
 ```
 ## d. Definir reglas de semántica operacional manteniendo el determinismo y la preservación de tipos. Importante: no olvidar las reglas de congruencia.  
 ```
-asd
+Obs: cg es congruencia y cm es computo.
+
+    M → M'                         N → N'
+----------------- cg-p1       -------------------- cg-p2
+ <M,N> → <M',N>                <V1,N> → <V1,N'>
+
+    M → M'                        M → M'
+---------------- cg-π1       ---------------- cg-π2
+ π1(M) → π1(M')                π2(M) → π2(M')
+
+π1(<V1,V2>) → V1   {cm-π1}
+π1(<V1,V2>) → V2   {cm-π2}
 ```
 ## e. Demostrar el determinismo de la relación de reducción definida. Se verica la propiedad de preservación de tipos? Se verica la propiedad de progreso?  
 ```
