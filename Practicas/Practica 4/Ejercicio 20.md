@@ -53,7 +53,7 @@ Obs: cg es congruencia y cm es computo.
 π1(<V1,V2>) → V1   {cm-π1}
 π1(<V1,V2>) → V2   {cm-π2}
 ```
-## e. Demostrar el determinismo de la relación de reducción definida. Se verifica la propiedad de preservación de tipos? Se verifica la propiedad de progreso?  
+## e. Demostrar el determinismo de la relación de reducción definida. Se verifica la propiedad de preservación de tipos? Se verifica la propiedad de progreso?  ??
 ```
 asd
 ```
