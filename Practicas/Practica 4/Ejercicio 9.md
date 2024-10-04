@@ -3,7 +3,7 @@ Decimos que un tipo τ está habitado si existe un término M tal que el juicio 
 Por ejemplo, dado un tipo σ, la identidad (λx : σ. x) es un habitante del tipo σ → σ.  
 Demostrar que los siguientes tipos están habitados (para cualquier σ, τ y ρ):
 
-Para pensar: el tipo b es el de la función conocida como Combinador S. Con qué función ya conocida de Haskellse corresponden los habitantes de los otros tipos? ¾Hay tipos que no estén habitados? Si se reemplaza → por⇒, las fórmulas habitadas son siempre tautologías? Las tautologías son siempre fórmulas habitadas?
+Para pensar: el tipo b es el de la función conocida como Combinador S. Con qué función ya conocida de Haskellse corresponden los habitantes de los otros tipos? Hay tipos que no estén habitados? Si se reemplaza → por⇒, las fórmulas habitadas son siempre tautologías? Las tautologías son siempre fórmulas habitadas?
 ## a. σ → τ → σ  
 ### λx: σ.λy: τ. x  
 ```
