@@ -12,19 +12,21 @@ donde σ × τ es el tipo de los pares cuya primera componente es de tipo σ y c
 ## b. Usando las reglas de tipado anteriores, y dados los tipos σ, τ y ρ, exhibir habitantes de los siguientes tipos: 
 I. Constructor de pares: σ → τ → (σ × τ).  
 ```
-asd
+λx: σ. λy: τ. <x,y>
 ```
-II. Proyecciones: (σ × τ ) → σ y (σ × τ ) → τ.  
+II. Proyecciones: (σ × τ) → σ y (σ × τ) → τ.  
 ```
-asd
+λp: σ x τ. π1(p)
+λp: σ x τ. π2(p)
 ```
-III. Conmutatividad: (σ × τ ) → (τ × σ).  
+III. Conmutatividad: (σ × τ) → (τ × σ).  
 ```
-asd
+λp: σ x τ. <π2(p), π1(p)>
 ```
-IV. Asociatividad: ((σ × τ ) × ρ) → (σ × (τ × ρ)) y (σ × (τ × ρ)) → ((σ × τ ) × ρ).  
+IV. Asociatividad: ((σ × τ) × ρ) → (σ × (τ × ρ)) y (σ × (τ × ρ)) → ((σ × τ) × ρ).  
 ```
-asd
+λx:((σ × τ) × ρ). < π1(π1(x)), <π1(π2(x)), π2(x)> >
+λy:(σ × (τ × ρ)). < <π1(y), π2(π1(y))>, π2(π2(y)) >
 ```
 V. Currificación: ((σ × τ ) → ρ) → (σ → τ → ρ) y (σ → τ → ρ) → ((σ × τ ) → ρ).  
 ```
