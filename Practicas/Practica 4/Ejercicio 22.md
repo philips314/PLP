@@ -1,8 +1,9 @@
 # Practica 4 / Ejercicio 22.  
-Este ejercicio extiende el Cálculo Lambda tipado con listas. Comenzamos ampliando el conjunto de tipos:  
+Este ejercicio extiende el Cálculo Lambda tipado con listas.  
+Comenzamos ampliando el conjunto de tipos:  
 τ ::= . . . | [τ]  
 donde [τ] representa el tipo de las listas cuyas componentes son de tipo τ . El conjunto de términos ahora incluye:  
-M, N, O ::= . . . | $[ ]_τ$ | M :: N | case M of {[ ] $\leadsto$ N | h :: t $\leadsto$ O} | foldr M base $\leadsto$ N;rec(h, r) $\leadsto$ O  
+M, N, O ::= . . . | $[ ]_τ$ | M :: N | case M of {[ ] $\leadsto$ N | h :: t $\leadsto$ O} | foldr M base $\leadsto$ N; rec(h, r) $\leadsto$ O  
 donde:
 * $[ ]_σ$ es la lista vacía cuyos elementos son de tipo σ.  
 * M :: N agrega M a la lista N.  
