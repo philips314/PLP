@@ -1,7 +1,7 @@
 # Practica 4 / Ejercicio 20.
 Este ejercicio extiende el cálculo-λ tipado con pares. Las gramáticas de los tipos y los términos se extienden de la siguiente manera:  
 τ ::= . . . | τ × τ  
-M ::= . . . | >M, M> | π1(M) | π2(M)  
+M ::= . . . | <M, M> | π1(M) | π2(M)  
 donde σ × τ es el tipo de los pares cuya primera componente es de tipo σ y cuya segunda componente es de tipo τ , <M, N> construye un par y π1(M) y π2(M) proyectan la primera y la segunda componente de un par, respectivamente.  
 ## a. Definir reglas de tipado para los nuevos constructores de términos.  
 ```
@@ -35,7 +35,8 @@ V. Currificación: ((σ × τ) → ρ) → (σ → τ → ρ) y (σ → τ → �
 ```
 ## c. Cómo se extiende el conjunto de los valores?  
 ```
-...
+τ ::= . . . | τ × τ  
+M ::= . . . | <M, M> | π1(M) | π2(M
 ```
 ## d. Definir reglas de semántica operacional manteniendo el determinismo y la preservación de tipos. Importante: no olvidar las reglas de congruencia.  
 ```
@@ -55,6 +56,19 @@ Obs: cg es congruencia y cm es computo.
 ## e. Demostrar el determinismo de la relación de reducción definida. Se verica la propiedad de preservación de tipos? Se verica la propiedad de progreso?  
 ```
 asd
+```
+## Extra. Verificar el siguiente juicio de tipado ∅ ⊢ π1((λx: Nat. <x, True>) 0): Nat  
+```
+---------------- t-VAR       ---------------------- t-TRUE
+x: Nat ⊢ x: Nat              x: Nat ⊢ True: Bool
+----------------------------------------------------- t-PAR
+x: Nat ⊢ <x, True>: Nat x Bool
+------------------------------------------ t-ABS          ------------ax0
+∅ ⊢ λx: Nat. <x, True>: Nat → Nat x Bool                  ∅ ⊢ 0: Nat
+------------------------------------------------------------------------- T-APP
+∅ ⊢ (λx: Nat. <x, True>) 0: Nat x Bool
+----------------------------------------- t-π1
+∅ ⊢ π1((λx: Nat. <x, True>) 0): Nat
 ```
 
  
