@@ -1,11 +1,13 @@
 # Practica 4 / Ejercicio 20.
 Este ejercicio extiende el cálculo-λ tipado con pares. Las gramáticas de los tipos y los términos se extienden de la siguiente manera:  
 τ ::= . . . | τ × τ  
-M ::= . . . | hM, Mi | π1(M) | π2(M)  
+M ::= . . . | >M, M> | π1(M) | π2(M)  
 donde σ × τ es el tipo de los pares cuya primera componente es de tipo σ y cuya segunda componente es de tipo τ , <M, N> construye un par y π1(M) y π2(M) proyectan la primera y la segunda componente de un par, respectivamente.  
 ## a. Definir reglas de tipado para los nuevos constructores de términos.  
 ```
-asd
+Γ ⊢ M: σ     Γ ⊢ N: τ                 Γ ⊢ M: σ x τ                 Γ ⊢ M: σ x τ
+------------------------- t-PAR       ----------------- t-FST      ----------------- t-SND
+Γ ⊢ <M, N>: σ × τ                     Γ ⊢ π1(M): σ                 Γ ⊢ π2(M): τ
 ```
 ## b. Usando las reglas de tipado anteriores, y dados los tipos σ, τ y ρ, exhibir habitantes de los siguientes tipos: 
 I. Constructor de pares: σ → τ → (σ × τ).  
