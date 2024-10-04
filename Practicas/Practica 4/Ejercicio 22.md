@@ -18,5 +18,13 @@ Por ejemplo:
 ```
 ```
 ## c. Demostrar el siguiente juicio de tipado (recomendación: marcar variables libres y ligadas en el término antes de comenzar).  
-### x : Bool, y : [Bool] ⊢ foldr x :: x :: y base $\leadsto$ y; rec(y, x) $\leadsto$ if y then x else $[ ]_{Bool}$ : [Bool]
+### x : Bool, y : [Bool] ⊢ foldr x :: x :: y base $\leadsto$ y; rec(y, x) $\leadsto$ if y then x else $[ ]_{Bool}$ : [Bool]  
+```
+```
+## d. Mostrar cómo se extiende el conjunto de valores. Estos deben reejar la forma de las listas que un programa podría devolver.  
+```
+```
+## e. Agregar los axiomas y reglas de reducción asociados a las nuevas expresiones.  
+```
+```
 
