@@ -19,20 +19,45 @@ No tipa, pues requiere informacion sobre el y (y: Nat) para tipar.
 ```
 ## IV. (λx: Bool. pred(isZero(x))) true  
 ```
+NO TIPA, no es un programa.
 
-
----------------------------------------
+x:Bool ⊢ x: Nat 
+-----------------------
+x:Bool ⊢ isZero(x): Nat
+-----------------------------
+x:Bool ⊢ pred(isZero(x)): Nat
+----------------------------------------- t-ABS       ------------- t-TRUE
+⊢ λx: Bool. pred(isZero(x)): Bool -> Nat               ⊢ true: Bool
+---------------------------------------------------------------------- t-APP
 ∅ ⊢ (λx: Bool. pred(isZero(x))) true
 ```
 ## V. (λf : Nat → Bool. f zero) (λx: Nat. isZero(x))  
 ```
+Es un programa, especificamente un valor.
+
+(λf : Nat → Bool. f zero) (λx: Nat. isZero(x))
+(f 0) {f := λx: Nat. isZero(x)} =
+(λx: Nat. isZero(x)) 0
+isZero(x){x := 0} =
+isZero(0) =
+true
 ```
 ## VI. (λf : Nat → Bool. x) (λx: Nat. isZero(x))  
 ```
+No es un programa, no tipa.
 ```
 ## VII. (λf : Nat → Bool. f pred(zero)) (λx :Nat. isZero(x))  
 ```
+(λf : Nat → Bool. f pred(zero)) (λx :Nat. isZero(x)) =
+(λf : Nat → Bool. f pred(0)) (λx :Nat. isZero(x)) =
+(f pred(0)){f := (λx :Nat. isZero(x))} =
+(λx :Nat. isZero(x)) pred(0) =
+λx :Nat. isZero(x){x := pred(0)} =
+isZero(pred(0))
+
+Como sacamos la regla pred(0) → 0, no podemos seguir reduciendo, pero isZero(pred(0)) no es un valor, asi que se considera un error.
 ```
 # VIII. µy : Nat. succ(y)  
 ```
+???
 ```
