@@ -53,7 +53,7 @@ Obs: cg es congruencia y cm es computo.
 π1(<V1,V2>) → V1   {cm-π1}
 π1(<V1,V2>) → V2   {cm-π2}
 ```
-## e. Demostrar el determinismo de la relación de reducción definida. Se verica la propiedad de preservación de tipos? Se verica la propiedad de progreso?  
+## e. Demostrar el determinismo de la relación de reducción definida. Se verifica la propiedad de preservación de tipos? Se verica la propiedad de progreso?  
 ```
 asd
 ```
@@ -69,6 +69,10 @@ x: Nat ⊢ <x, True>: Nat x Bool
 ∅ ⊢ (λx: Nat. <x, True>) 0: Nat x Bool
 ----------------------------------------- t-π1
 ∅ ⊢ π1((λx: Nat. <x, True>) 0): Nat
+```
+## Extra. Reducir π1((λx: Nat. <x, True>) 0) a un valor.  
+```
+π1((λx: Nat. <x, True>) 0) → π1(<0, True>) → 0     {B,cm-π1}
 ```
 
  
