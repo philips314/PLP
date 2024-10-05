@@ -51,7 +51,7 @@ elem e (x:xs) && p e= {E1}
 elem e (filter p (x:xs) ) = {FI1}
 elem e (if p x then x : filter p xs else filter p xs)
 ```
-Por **extensionalidad sobre Booleanos**: `p e :: Bool` ==> Puede ser True o False & `p x :: Bool` ==> Puede ser True o False
+Por **extensionalidad sobre Booleanos**: `p e :: Bool` ==> Puede ser True o False & `p x :: Bool` ==> Puede ser True o False.  
 **Caso 1:** `p e = False` & `p x = False`
 ```
 (e == x || elem e xs) && p e = {p e = False}
