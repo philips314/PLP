@@ -32,6 +32,7 @@ zip [] ys = {Z0}
 foldr ( \x rec ys -> if null ys then [] else (x, head ys) : rec (tail ys) ) (const []) [] ys = {F0}
 (const []) ys = {C}
 []
+
 Por el otro:
 zip' [] ys = {Z'0}
 []
@@ -57,5 +58,5 @@ Por el otro:
 zip' (x:xs) ys = {Z'1}
 if null ys then [] else (x, head ys) : zip' xs (tail ys)
 
-Llegamos a lo mismo desde los dos lados. ∴P(x:xs) vale, y con ello, vale lo que queriamos probar. 
+Llegamos a lo mismo desde los dos lados. ∴P(x:xs) vale, y con ello, vale lo que se queria probar. 
 ```
