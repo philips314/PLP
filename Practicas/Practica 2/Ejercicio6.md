@@ -9,16 +9,15 @@
      intersect :: Eq a => [a] -> [a] -> [a]
 {I0} intersect xs ys = filter (\e -> elem e ys) xs
 ```
-Indicar si las siguientes propiedades son verdaderas o falsas. Si son verdaderas, realizar una demostración. Si
-son falsas, presentar un contraejemplo.
+Indicar si las siguientes propiedades son verdaderas o falsas. Si son verdaderas, realizar una demostración. Si son falsas, presentar un contraejemplo.
 
 # I.  
 ```
 Eq a => ∀xs::[a]. ∀e::a. ∀p::a->Bool. elem e xs && p e = elem e (filter p xs)
 ```
 Verdadero  
-Intuitivamente: Indica que si e esta en xs y p(e) entonces e va a estar en filter p xs, ya que filter solo "saca" los elementos que no cumplan p.
-Por **Induccion estructural sobre listas**, tenemos que:
+Intuitivamente: Indica que si e esta en xs y p(e) entonces e va a estar en filter p xs, ya que filter solo "saca" los elementos que no cumplan p.  
+Por **Induccion estructural sobre listas**, tenemos que:  
 
 ```
 ∀xs::[a]. P(xs), donde P(xs): ∀e::a. ∀p::a->Bool. elem e xs && p e = elem e (filter p xs)
@@ -31,11 +30,11 @@ False && p e = {&&}
 False, y esto hace verdarera la implicacion
 P([]) vale
 ```
-Caso Inductivo: ∀xs::[a]. ∀x::a. P(xs) {HI} => P(x:xs) {TI}
-Asumo que P(xs) vale y qvq P(x:xs) es verdadera.
-Donde:
-P(xs): elem e xs && p e = elem e (filter p xs) {HI}
-P(x:xs): elem e (x:xs) && p e = elem e (filter p (x:xs)) {TI}
+Caso Inductivo: ∀xs::[a]. ∀x::a. P(xs) {HI} => P(x:xs) {TI}  
+Asumo que P(xs) vale y qvq P(x:xs) es verdadera.  
+Donde:  
+P(xs): elem e xs && p e = elem e (filter p xs) {HI}  
+P(x:xs): elem e (x:xs) && p e = elem e (filter p (x:xs)) {TI}  
 
 ```
 elem e (x:xs) && p e= {E1}
