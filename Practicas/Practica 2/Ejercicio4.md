@@ -1,7 +1,7 @@
 # Practica 2 / Ejercicio 4 
-## Demostrar las siguientes propiedades utilizando inducción estructural sobre listas y el principio de extensionalidad:
-# I.
-reverse . reverse = id. 
+Demostrar las siguientes propiedades utilizando inducción estructural sobre listas y el principio de extensionalidad:
+## I.
+###reverse . reverse = id. 
 ```
 {REVERSE}: reverse = foldl (flip (:)) []
 {F0}: foldl f z [] = z
@@ -40,8 +40,8 @@ reverse (foldl (flip (:)) ((flip (:)) [] x) xs) = {FLIP y (:)}
 reverse (foldl (flip (:)) [x]) xs) ????
 ```
 
-# II.  
-append = (++).  
+## II.  
+### append = (++).  
 ```
 {A0}: append [] ys = ys
 {A1}: append (x:xs) ys = x : append xs ys
@@ -86,8 +86,8 @@ x : xs ++ ys = {:}
 Llegamos a lo mismo de ambos lados del igual. ∴vale P(x:xs) y se prueba la propiedad.
 ```
 
-# III.  
-map id = id.
+## III.  
+### map id = id.
 ```
 {ID}: id x = x
 {M0}: map _ [] = []
@@ -128,8 +128,8 @@ id (x:xs)
 Llegamos a lo mismo. ∴vale P(x:xs) y se prueba la propiedad.
 ```
 
-# IV.  
-∀f::a->b. ∀g::b->c. map (g . f) = map g . map f
+## IV.  
+### ∀f::a->b. ∀g::b->c. map (g . f) = map g . map f
 ```
 {.}: f . g x = f (g x)
 {M0}: map _ [] = []
@@ -172,8 +172,8 @@ Llegamos a lo mismo de ambos lados del igual. ∴vale P(x:xs) y se prueba la pro
 ```
 
 
-# V.  
-∀f::a->b. ∀p::b->Bool. map f . filter (p . f) = filter p . map f.
+## V.  
+### ∀f::a->b. ∀p::b->Bool. map f . filter (p . f) = filter p . map f.
 ```
 {(.)}: (.) f g x = f (g x)
 {M0}:  map _ []     = []
@@ -242,8 +242,8 @@ Por extensionalidad de booleanos hay 2 casos:
 
 Llegamos a lo mismo de ambos lados del igual. ∴vale P(x:xs) y se prueba la propiedad.
 ```
-# VI. ???
-∀f::a->b. ∀e::a. ∀xs::[a]. ((elem e xs) ⇒ (elem (f e) (map f xs)))  (asumiendo Eq a y Eq b)
+## VI. ???
+### ∀f::a->b. ∀e::a. ∀xs::[a]. ((elem e xs) ⇒ (elem (f e) (map f xs)))  (asumiendo Eq a y Eq b)
 ```
 {E0}: elem e [] = False
 {E1}: elem e (x:xs) = e == x || elem e xs
