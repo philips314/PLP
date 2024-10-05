@@ -111,9 +111,9 @@ Tengo lo mismo de los dos lados.
 ```
 Eq a => ∀xs::[a]. ∀e::a. elem e xs = elem e (nub xs)
 ```
-Nub es una funcion que quita los elementos repetidos de una lista. Por lo tanto, si un elemento e pertenece a xs, este tambien deberia pertenecer en nub xs.  
+Nub es una funcion que elimina los elementos repetidos de una lista. Por lo tanto, si un elemento e pertenece a xs, este tambien deberia pertenecer en nub xs.  
 Quiero probar que la afirmacion es verdadera.  
-Por Induccion estructural sobre listas xs , tenemos que:
+Por Induccion estructural sobre listas xs , tengo que:
 ```
 ∀xs::[a]. P(xs), donde p(xs): ∀e::a. elem e xs = elem e (nub xs)
 ```
@@ -158,7 +158,7 @@ Si e == x es False:
 Eq a => ∀xs::[a]. ∀ys::[a]. length (union xs ys) = length xs + length ys
 ```
 Falso.  
-Intuitivamente, pueden haber elementos repetidos entre las listas. El lado izq las toma en cuenta para evitarlas, y el lado derecho las incluye.
+Intuitivamente: Pueden haber elementos repetidos entre las listas. El lado izq las toma en cuenta para evitarlas, y el lado derecho las incluye.
 **Contraejemplo:**
 ```
 xs = [2] ys = [2]
