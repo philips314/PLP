@@ -1,7 +1,7 @@
 # Practica 2 / Ejercicio 4 
 Demostrar las siguientes propiedades utilizando inducción estructural sobre listas y el principio de extensionalidad:
 ## I.
-###reverse . reverse = id. 
+### reverse . reverse = id. 
 ```
 {REVERSE}: reverse = foldl (flip (:)) []
 {F0}: foldl f z [] = z
