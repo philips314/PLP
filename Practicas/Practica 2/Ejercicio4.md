@@ -242,14 +242,8 @@ Por extensionalidad de booleanos hay 2 casos:
 
 Llegamos a lo mismo de ambos lados del igual. ∴vale P(x:xs) y se prueba la propiedad.
 ```
-## VI. ???
-### ∀f::a->b. ∀e::a. ∀xs::[a]. ((elem e xs) ⇒ (elem (f e) (map f xs)))  (asumiendo Eq a y Eq b).
-```
-{E0}: elem e [] = False
-{E1}: elem e (x:xs) = e == x || elem e xs
-{M0}: map _ [] = []
-{M1}: map f (x:xs) = f x : map f xs
-```
+## VI.  
+### ∀f::a->b. ∀e::a. ∀xs::[a]. ((elem e xs) ⇒ (elem (f e) (map f xs)))  (asumiendo Eq a y Eq b).  
 Por extencionalidad funcional e induccion estructural sobre listas xs, basta ver que:  
 ```
 ∀xs::[a]. P(xs), donde P(xs): ∀f::a->b. ∀e::a. ((elem e xs) ⇒ (elem (f e) (map f xs)))
@@ -257,7 +251,9 @@ Por extencionalidad funcional e induccion estructural sobre listas xs, basta ver
 **Caso Base:** `P([])`
 ```
 ((elem e []) = {E0}
-False, y con esto sabemos que vale la implicacion 
+False ⇒ (elem (f e) (map f xs))) = {Bool}
+True
+
 P([]) vale
 ```
 **Caso Inductivo:** `∀xs::[a]. ∀x::a. P(xs) {HI} => P(x:xs) {TI}`  
@@ -266,25 +262,35 @@ Donde:
 P(xs): ((elem e xs) ⇒ (elem (f e) (map f xs))). {HI}  
 P(x:xs): ((elem e (x:xs)) ⇒ (elem (f e) (map f (x:xs)))). {TI}
 ```
-elem e (x:xs) {E1}
-e == x || elem e xs
-Por extencionalidad de Booleanos, hay cuatro casos:
-e == x = True ∧ elem e xs = True
-  e == x || elem e xs = {True}
-  True || True = {||}
-  True
-e == x = False ∧ elem e xs = True
-  e == x || elem e xs = {False ∧ True}
-  False || True = {||}
-  True 
-e == x = True ∧ elem e xs = False
-  e == x || elem e xs = {True ∧ False}
-  True || False = {||}
-  True
-e == x = False ∧ elem e xs = False
-  e == x || elem e xs = {False ∧ False}
-  False || False = {||}
-  False
-
-?????
+elem e (x:xs) ⇒ elem (f e) (map f (x:xs)) = {ELEM}
+e == x || elem e xs ⇒ elem (f e) (map f (x:xs)) = {M1}
+e == x || elem e xs ⇒ elem (f e) (f x : map f xs) = {ELEM}
+e == x ||  elem e xs ⇒ f e == f x || elem (f e)  (map f xs)
 ```
+Por extensionalidad de bool, tengo que: e == x puede ser True o False & f e == f x tambien.
+Caso 1: `e == x = True` &  `f e == f x = True`
+```
+e == x || elem e xs ⇒ f e == f x || elem (f e) (map f xs) = {caso 1}
+True || elem e xs ⇒ True || elem (f e) = {||}
+True ⇒ True {⇒}
+True
+```
+Caso 2: `e == x = False` &  `f e == f x = False`
+```
+e == x || elem e xs ⇒ f e == f x || elem (f e) (map f xs) = {caso 2}
+False || elem e xs ⇒ False || elem (f e) (map f xs) = {||}
+elem e xs ⇒ elem (f e) (map f xs) = {vale por HI}
+True
+```
+Caso 3: `e == x = True` &  `f e == f x = False`
+```
+Este caso no tiene sentido porque si e == x entonces f e == f x, por lo que no es necesario evaluar.
+```
+Caso 4: `e == x = False` &  `f e == f x = True`
+```
+e == x || elem e xs ⇒ f e == f x || elem (f e) (map f xs) = {caso 4}
+False || elem e xs ⇒ True || elem (f e) (map f xs) = {||}
+elem e xs ⇒ True = {⇒}
+True
+```
+∴vale P(x:xs) y se prueba la propiedad.
