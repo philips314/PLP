@@ -16,14 +16,13 @@
 {P0} ponerAlFinal x = foldr (:) (x:[])
      reverse :: [a] -> [a]
 {R0} reverse = foldl (flip (:)) []
-{F0} foldr _ z []     = z
-{F1} foldr f z (x:xs) = f x (foldr f z xs)
+{FR0} foldr _ z []     = z
+{FR1} foldr f z (x:xs) = f x (foldr f z xs)
 {M0}: map _ []     = []
 {M1}: map f (x:xs) = f x : map xs
 {FL0}: foldl _ z [] = z
 {FL1}: foldl f z (x:xs) = foldl f (f z x) xs
-{F}: flip f x y = f y x
-{RE}: reverse = foldl (flip (:)) []
+{FLIP}: flip f x y = f y x
 
 ```
 # I.
@@ -220,13 +219,13 @@ P(x:xs): ponerAlFinal x (x:xs) = (x:xs) ++ (x:[]). {TI}
 ```
 ponerAlFinal x (x:xs) = {P0}
 foldr (:) (x':[]) (x:xs) = {:}
-foldr (:) [x'] (x:xs) = {F1}
+foldr (:) [x'] (x:xs) = {FR1}
 (:) x (foldr (:) [x'] xs) = {:}
 x : (foldr (:) [x'] xs)
 
 (x:xs) ++ (x':[]) = {:}
 (x:xs) ++ [x'] = {++}
-foldr (:) [x'] (x:xs) = {F1}
+foldr (:) [x'] (x:xs) = {FR1}
 (:) x (foldr (:) [x'] xs) = {:}
 x : (foldr (:) [x'] xs)
 
@@ -240,8 +239,8 @@ Por extensionalidad funcional, basta ver que ∀ys::[a]. P(ys), donde P(ys): rev
 Por induccion estructural sobre xs tenemos dos casos: Base e inductivo  
 **Caso Base:** `P([])`
 ```
-reverse [] = {RE}
-foldr (\x rec -> rec ++ (x:[])) [] [] = {FR0}
+reverse [] = {R0}
+foldl (flip (:)) [] [] = {FL0}
 []
 
 foldr (\x rec -> rec ++ (x:[])) [] [] = {FR0}
@@ -253,19 +252,55 @@ P([]) vale
 **Caso inductivo:** `∀xs::[a]. ∀ x::a. P(xs) {HI} => P(x:xs) {TI}`  
 Donde:  
 P(xs): reverse xs = foldr (\x rec -> rec ++ (x:[])) [] xs. {HI}  
-P(x:xs): ponerAlFinal x (x:xs) = (x:xs) ++ (x:[]). {TI}
+P(x:xs): reverse (x:xs) = foldr (\x rec -> rec ++ (x:[])) [] (x:xs). {TI}
 ```
-ponerAlFinal x (x:xs) = {P0}
-foldr (:) (x':[]) (x:xs) = {:}
-foldr (:) [x'] (x:xs) = {F1}
-(:) x (foldr (:) [x'] xs) = {:}
-x : (foldr (:) [x'] xs)
+reverse (x:xs) = {R0}
+foldl (flip (:)) [] (x:xs) = {FL1}
+foldl (flip (:)) ((flip (:)) [] x) xs = {FLIP}
+foldl (flip (:)) ((:) x []) xs = {:}
+foldl (flip (:)) [x] xs = {LEMA1}
+reverse xs ++ [x]
 
-(x:xs) ++ (x':[]) = {:}
-(x:xs) ++ [x'] = {++}
-foldr (:) [x'] (x:xs) = {F1}
-(:) x (foldr (:) [x'] xs) = {:}
-x : (foldr (:) [x'] xs)
+foldr (\x rec -> rec ++ (x':[])) [] (x:xs) = {FR1}
+(\x' rec -> rec ++ [x']) x (foldr (\y rec -> rec ++ [y]) [] xs) = {B} donde x'=x & rec=(foldr (\y rec -> rec ++ [y]) [] xs)
+(foldr (\y rec -> rec ++ [y]) [] xs) ++ [x] = {HI}
+reverse xs ++ [x]
 
 Llegamos a lo mismo de ambos lados del igual. ∴vale P(x:xs) y se prueba la propiedad.
+```
+```
+--Lema 1--
+P(xs): ∀xs::[a]. ∀y::a. foldl (flip (:)) [y] xs = reverse xs ++ [y]
+```
+**Caso Base:** `P([])`  
+```
+foldl (flip (:)) [y] [] = {FL0}
+[y]
+
+reverse [] ++ [y] = {R0}
+foldl (flip (:)) [] [] ++ [y] = {FL0}
+[] ++ [y] = {++}
+[y]
+
+P([]) vale
+```
+**Caso inductivo:** `∀xs::[a]. ∀ x::a. P(xs) {HI} => P(x:xs) {TI}`  
+Donde:  
+P(xs): foldl (flip (:)) [y] xs = reverse xs ++ [y] {HI}  
+P(x:xs): foldl (flip (:)) [y] (x:xs) = reverse (x:xs) ++ [y] {TI}  
+```
+foldl (flip (:)) [y] (x:xs) = {FL1}
+foldl (flip (:)) ((flip (:)) [y] x) xs = {FLIP}
+foldl (flip (:)) ((:) x [y]) xs = {:}
+foldl (flip (:)) ([x:y]) xs = {HI}
+reverse xs ++ [x:y]
+
+reverse (x:xs) ++ [y] = {R0}
+foldl (flip (:)) [] (x:xs) ++ [y] = {FL1}
+foldl (flip (:)) ((flip (:)) [] x) xs ++ [y]  = {FLIP ; :}
+foldl (flip (:)) [x] xs ++ [y] = {HI}
+reverse xs ++ [x] ++ [y] = {++}
+reverse xs ++ [x:y]
+
+Llegamos a lo mismo de ambos lados del igual. ∴vale el LEMA 1
 ```
