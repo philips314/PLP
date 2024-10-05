@@ -247,8 +247,7 @@ foldr (\x rec -> rec ++ (x:[])) [] [] = {FR0}
 []
 
 P([]) vale
-```
-????
+```  
 **Caso inductivo:** `∀xs::[a]. ∀ x::a. P(xs) {HI} => P(x:xs) {TI}`  
 Donde:  
 P(xs): reverse xs = foldr (\x rec -> rec ++ (x:[])) [] xs. {HI}  
@@ -303,4 +302,19 @@ reverse xs ++ [x] ++ [y] = {++}
 reverse xs ++ [x:y]
 
 Llegamos a lo mismo de ambos lados del igual. ∴vale el LEMA 1
+```
+## VIII. ???
+```
+∀xs::[a]. ∀x::a. head (reverse (ponerAlFinal x xs)) = x.
+```
+Por extensionalidad funcional e induccion sobre listas xs, basta con probar que:  
+∀xs::[a]. ∀x::a. P(xs): head (reverse (ponerAlFinal x xs)) = x.  
+Tenemos dos casos: Base e Inductivo.  
+**Caso Base:** `P([])`  
+```
+head (reverse (ponerAlFinal x [])) = x.
+head (reverse (ponerAlFinal x [])) = {P0}
+head (reverse (foldr (:) (x:[]) [])) = {FR0; :}
+head (reverse [x]) = {R0}
+head (foldl (flip (:)) [] [x])
 ```
