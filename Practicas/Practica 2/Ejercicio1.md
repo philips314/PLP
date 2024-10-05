@@ -22,7 +22,7 @@ intercambiar (intercambiar (x,y)) = {intercambiar}
 intercambiar (y,x) = {intercambiar}
 (x,y)
 ```
-## II. ??
+## II.  
 ```
 ∀p::(a,(b,c)). asociarD (asociarI p) = p
 ```
