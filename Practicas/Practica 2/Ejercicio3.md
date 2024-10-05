@@ -128,7 +128,9 @@ Por induccion estructural sobre xs tenemos dos casos: Base e inductivo
 length (map f []) = {M0}
 length [] = {L0}
 0 = {L0}
-length []
+
+length [] = {L0}
+0
 
 P([]) vale
 ```
@@ -140,8 +142,10 @@ P(x:xs): length (map f (x:xs)) = length (x:xs). {TI}
 length (map f (x:xs)) = {M1}
 length (f x : map f xs) = {L1}
 1 + lenght (map f xs) = {HI}
-1 + length xs = {DEF LENGTH}
-length (x:xs)
+1 + length xs = {LENGTH}
+
+length (x:xs) = {LENGTH}
+1 + length xs
 
 Llegamos a lo mismo. ∴vale P(x:xs) y se prueba la propiedad.
 ```
