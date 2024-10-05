@@ -107,7 +107,6 @@ e == x
 Sea e == x, entonces p e == p x, pero habia asumido que p e = False y p x = True ==> Asi que me queda False == True = False.
 Tengo lo mismo de los dos lados.
 ```
-???  
 # II.
 ```
 Eq a => ∀xs::[a]. ∀e::a. elem e xs = elem e (nub xs)
