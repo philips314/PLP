@@ -58,10 +58,10 @@ r == e || elem e (inorder izq) || elem e (inorder der)
 
 Se pudo llegar a lo mismo de los dos lados del igual, por lo que vale lo que queria probar.
 ```
-Lema 1:  
+**Lema 1:**  
 `Eq a => ∀e::a. ∀xizq, yder::[a]. elem e (xizq ++ (e : yder)) = r == e || (elem e xizq) || (elem e yder)`  
 Hago induccion sobre listas xizq, con la proposicion:  
-P(zs): `∀xs,ys::[a]. ∀e,r::a. elem e (zs ++ (r:ys)) = r == e || elem e zs || elem e ys`  
+**P(zs)**: `∀xs,ys::[a]. ∀e,r::a. elem e (zs ++ (r:ys)) = r == e || elem e zs || elem e ys`  
 Por induccion estructural, busco demostrar que: P([]) ∧ P(xs) {HI} ⇒ P(x:xs) {TI}  
 Caso base: `P([])`  
 ```
