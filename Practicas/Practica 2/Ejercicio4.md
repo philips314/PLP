@@ -129,7 +129,7 @@ Llegamos a lo mismo. ∴vale P(x:xs) y se prueba la propiedad.
 ```
 
 ## IV.  
-### ∀f::a->b. ∀g::b->c. map (g . f) = map g . map f
+### ∀f::a->b. ∀g::b->c. map (g . f) = map g . map f.
 ```
 {.}: f . g x = f (g x)
 {M0}: map _ [] = []
@@ -243,7 +243,7 @@ Por extensionalidad de booleanos hay 2 casos:
 Llegamos a lo mismo de ambos lados del igual. ∴vale P(x:xs) y se prueba la propiedad.
 ```
 ## VI. ???
-### ∀f::a->b. ∀e::a. ∀xs::[a]. ((elem e xs) ⇒ (elem (f e) (map f xs)))  (asumiendo Eq a y Eq b)
+### ∀f::a->b. ∀e::a. ∀xs::[a]. ((elem e xs) ⇒ (elem (f e) (map f xs)))  (asumiendo Eq a y Eq b).
 ```
 {E0}: elem e [] = False
 {E1}: elem e (x:xs) = e == x || elem e xs
