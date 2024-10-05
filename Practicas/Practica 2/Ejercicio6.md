@@ -12,6 +12,10 @@
 {FI1} filter p (x:xs) =  if p x then x : (filter p xs) else filter p xs
 {E0}: elem e []     = False
 {E1}: elem e (x:xs) = x == e || elem x xs
+     (++) :: [a] -> [a] -> [a]
+{++} xs ++ ys = foldr (:) ys xs
+{FR0} foldr _ z []     = z
+{FR1} foldr f z (x:xs) = f x (foldr f z xs)
 ```
 Indicar si las siguientes propiedades son verdaderas o falsas. Si son verdaderas, realizar una demostración. Si son falsas, presentar un contraejemplo.
 
@@ -107,7 +111,7 @@ e == x
 Sea e == x, entonces p e == p x, pero habia asumido que p e = False y p x = True ==> Asi que me queda False == True = False.
 Tengo lo mismo de los dos lados.
 ```
-# II.
+# II. ??
 ```
 Eq a => ∀xs::[a]. ∀e::a. elem e xs = elem e (nub xs)
 ```
@@ -152,7 +156,30 @@ Si e == x es False:
 
      
 ```
+# III.  
+```
+Eq a => ∀ xs::[a] . ∀ ys::[a] . ∀ e::a . elem e (union xs ys) = (elem e xs) || (elem e ys)
+```
+Es verdadero, si un elemento pertenece a la union de dos listas deberia pertenecer a alguna de las dos (o las dos).  
+Por extensionalidad funcional e induccion sobre listas xs, quiero probar que:  
+```
+∀xs::[a]. P(xs): ∀e::a. ∀ys::[a]. elem e (union xs ys) = (elem e xs) || (elem e ys)
+```
+**Caso Base:** `P([])`  
+```
+nub (x:xs) = x : filter (\y -> x /= y) (nub xs)
+{++} xs ++ ys = foldr (:) ys xs
 
+elem e (union [] ys) = {U0}
+elem e (nub ([] ++ ys)) = {++}
+elem e (nub (foldr (:) ys [])) = {FR0}
+elem e (nub ys)
+
+(elem e []) || (elem e ys) = {ELEM}
+False || elem e ys = {||}
+elem e ys
+
+```
 # V.  
 ```
 Eq a => ∀xs::[a]. ∀ys::[a]. length (union xs ys) = length xs + length ys
