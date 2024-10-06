@@ -55,6 +55,93 @@ data AEB a = Hoja a | Bin (AED a) a (AED a)
                     (r == head xs && (esPrerama i (tail xs) || esPreRama d (tail xs)))
 ```
 ### a. Asumiendo Eq a, demostrar:  
-∀t::AEB a. ∀xs::[a]. esPreRama t xs ⇒ legth xs ≤ altura t  
+`∀t::AEB a. ∀xs::[a]. esPreRama t xs ⇒ legth xs ≤ altura t`
+Para demostrar esta proposicion, hago induccion estructural sobre el AEB. Tiene dos constructores: Hoja y Bin.  
+Defino P(x): esPreRama x xs ⇒ length xs ≤ altura x.  
+Caso base: `P(Hoja h)`  
 ```
+esPreRama (Hoja h) xs ⇒ legth xs ≤ altura (Hoja h) = {E0 ; A0}
+(\xs -> null xs || (xs == [h])) xs ⇒ legth xs ≤ 1 = {B}
+null xs || (xs == [h]) ⇒ legth xs ≤ 1
+
+Luego de ver los casos por extensionalidad, conluyo que P(Hoja h) vale.
+```
+Por extensionalidad de boolenaos: (null xs) y (xs == [h]) pueden ser True o False. Tengo 4 casos:  
+Caso 1: `null xs = True` y `xs == [h] = True`  
+```
+No tiene sentido probar esto pues si xs == [], entonces no puede pasar que xs == [h].
+```
+Caso 2: `null xs = False` y `xs == [h] = False`  
+```
+null xs || (xs == [h]) ⇒ legth xs ≤ 1 = {CASO 2}
+False || False ⇒ legth xs ≤ 1 = {||}
+False ⇒ legth xs ≤ 1 = {⇒}
+True
+```
+Caso 3: `null xs = True` y `xs == [h] = False`  
+```
+null xs || (xs == [h]) ⇒ legth xs ≤ 1 = {CASO 3}
+True || False ⇒ legth xs ≤ 1 = {||}
+True ⇒ legth xs ≤ 1 {null xs = True; L0}
+True ⇒ 0 ≤ 1 {≤}
+True ⇒ True = {⇒}
+True
+```
+Caso 4: `null xs = False` y `xs == [h] = True`  
+```
+null xs || (xs == [h]) ⇒ legth xs ≤ 1 = {CASO 4}
+False || True ⇒ legth xs ≤ 1 = {||}
+True ⇒ legth xs ≤ 1 {null xs = True; L0}
+True ⇒ 0 ≤ 1 {≤}
+True ⇒ True = {⇒}
+True
+```  
+Paso inductivo: P(Bin i r d).  
+Asumo que: `∀i,d::AEB a. P(i) ∧ P(d)` vale {HI}.  
+Qvq: `(∀i,d::AEB a. P(i) ∧ P(d)) ⇒ (∀r::a. P(Bin i r d))`, es decir que P(Bin i r d) es mi TI.  
+```
+esPreRama (Bin i r d) xs = {E1}
+\xs -> null xs || (r == head xs && (esPrerama i (tail xs) || esPreRama d (tail xs))) xs = {B}
+null xs || (r == head xs && (esPrerama i (tail xs) || esPreRama d (tail xs)))
+
+length xs ≤ altura (Bin i r d) = {A1}
+length xs ≤ 1 + max (altura i) (altura d)
+
+Me queda:
+null xs || (r == head xs && (esPrerama i (tail xs) || esPreRama d (tail xs))) ⇒ length xs ≤ 1 + max (altura i) (altura d)
+```
+Voy a usar extensionalidad sobre listas:  
+Caso base: xs = [].  
+```
+null [] || (r == head [] && (esPrerama i (tail []) || esPreRama d (tail []))) ⇒ length [] ≤ 1 + max (altura i) (altura d) = {N0 ; ||}
+True ⇒ length [] ≤ 1 + max (altura i) (altura d) = {L0}
+True ⇒ 0 ≤ 1 + max (altura i) (altura d)
+
+Como ∀t::AED a. altura t ≥ 0, entonces me queda:
+True ⇒ 0 ≤ 1 + 0 = {≤}
+True ⇒ True = {⇒}
+True
+
+El caso base vale!
+```
+Caso xs = (y:ys).  
+```
+null (y:ys) || (r == head (y:ys) && (esPrerama i (tail (y:ys)) || esPreRama d (tail (y:ys)))) ⇒ length (y:ys) ≤ 1 + max (altura i) (altura d) = {N1, H, T, L1}
+False || (r == y && (esPrerama i ys) || esPreRama d ys)) ⇒ 1 + length ys ≤ 1 + max (altura i) (altura d) = {||}
+r == y && ((esPrerama i ys) || esPreRama d ys) ⇒ 1 + length ys ≤ 1 + max (altura i) (altura d)
+```
+Por extensionalidad de booleanos r == y puede ser True o False.  
+Caso 1: `r == y = False`  
+```
+(r == y) && ((esPrerama i ys) || (esPreRama d ys)) ⇒ 1 + length ys ≤ 1 + max (altura i) (altura d) = {CASO 1}
+False && ((esPrerama i ys) || (esPreRama d ys)) ⇒ 1 + length ys ≤ 1 + max (altura i) (altura d)
+False ⇒ 1 + length ys ≤ 1 + max (altura i) (altura d) = {⇒}
+True
+```
+Caso 2: `r == y = True`  
+```
+(esPrerama i ys) || (esPreRama d ys) ⇒ 1 + length ys ≤ 1 + max (altura i) (altura d) 
+
+Por HI tengo que esPreRama t xs ⇒ legth xs ≤ altura t. Por lo tanto...
+True
 ```
