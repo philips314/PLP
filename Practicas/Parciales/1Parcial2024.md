@@ -1,2 +1,1 @@
-# Primer parcial 2024.  
-## Primer cuatrimestre.  
+# Primer parcial 2024 -> Primer cuatrimestre.  
