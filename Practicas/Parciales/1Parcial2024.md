@@ -48,6 +48,13 @@ data AEB a = Hoja a | Bin (AED a) a (AED a)
 {L1} length (x:xs) = 1 + length xs
 {N0} null [] = True
 {N1} null (x:xs) = False
-{A0} altura (Hoja x) = 
-{A1}
+{A0} altura (Hoja x) = 1
+{A1} altura (Bin i r d) = 1 + max (altura i) (altura d)
+{E0} esPreRama (Hoja x) = \xs -> null xs || (xs == [x])
+{E1} esPreRama (Bin i r d) = \xs -> null xs ||
+                    (r == head xs && (esPrerama i (tail xs) || esPreRama d (tail xs)))
+```
+### a. Asumiendo Eq a, demostrar:  
+∀t::AEB a. ∀xs::[a]. esPreRama t xs ⇒ legth xs ≤ altura t  
+```
 ```
