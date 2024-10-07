@@ -1,7 +1,8 @@
 # Programacion funcional.  
 
 # Demostración e inferencia.  
-## I. Demostrar usando deduccion natural, sin utilizar principios clásicos:  
+## I.  
+Demostrar usando deduccion natural, sin utilizar principios clásicos:  
 ((P ⇒ Q) ∧ (Q ⇒ R)) ⇒ ¬R ⇒ ¬P  
 ```
 
