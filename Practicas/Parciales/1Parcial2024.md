@@ -174,3 +174,23 @@ True
 ------------------------------------------------------------------------------------------------------------------------- ⇒e
 ((P ⇒ Q) ∧ (Q ⇒ R)), ¬R, P, P ⊢ R
 ```
+## Ejercicio 3.  
+Se desea modelar Diccionarios, para eso se extienden los tipos y expresiones de la siguiente manera:  
+τ ::= . . . | Dicc(τ,τ)  
+M ::= . . . | $Vacio_{σ,τ}$ | definir(M,M,M) | def?(M,M) | obtener(M,M)  
+* Dicc(σ,τ) es el tipo de los diccionarios con claves de tipo σ y valores de tipo τ.  
+* $Vacio_{σ,τ}$ es un diccionario vacio con claves σ y valores τ.
+* definir(M,N,O) define el valor O en la clave N para el diccionario M.
+* def?(M,N) indica si la clave N fue definida para el diccionario M.
+* obtener(M,M) da el valor asociado a la clave N en el diccionario M.
+### a. Introducir las reglas de tipado para la extensión propuesta.  
+```
+```
+### b. Definir el conjunto de valores y las nuevas reglas de semántica operacional a pequeños pasos. No es necesario escribir la reglas de congruencia, sino que basta con indicar cuantas son.   
+```
+```
+### c. Mostrar paso por paso como reduce la expresión:  
+(suponer que zero == zero -> True)  
+(λd:Dicc(Nat,Bool). if def?(d,0) then obtener(d,0) else False) definir($Vacio_{Nat,Bool}$,0,True). 
+```
+```
