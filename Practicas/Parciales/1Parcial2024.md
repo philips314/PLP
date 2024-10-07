@@ -185,12 +185,35 @@ M ::= . . . | $Vacio_{σ,τ}$ | definir(M,M,M) | def?(M,M) | obtener(M,M)
 * obtener(M,M) da el valor asociado a la clave N en el diccionario M.
 ### a. Introducir las reglas de tipado para la extensión propuesta.  
 ```
+-------------------------- axVacio
+Γ ⊢ Vacio_{σ,τ}: Dicc(σ,τ)
+
+Γ ⊢ M: Dicc(σ,τ)    Γ ⊢ N:σ     Γ ⊢ O:τ
+------------------------------------------ definir
+Γ ⊢ definir(M,N,O): Dicc(σ,τ)
+
+Γ ⊢ M: Dicc(σ,τ)    Γ ⊢ N:σ
+-------------------------------- def?
+Γ ⊢ def?(M,N): Bool
+
+Γ ⊢ M: Dicc(σ,τ)    Γ ⊢ N:σ
+-------------------------------- obtener
+Γ ⊢ obtener(M,N): τ
 ```
 ### b. Definir el conjunto de valores y las nuevas reglas de semántica operacional a pequeños pasos. No es necesario escribir la reglas de congruencia, sino que basta con indicar cuantas son.   
 ```
+V ::= ... | Vacio_{σ,τ} | definir(V,V,V)
+Reglas de semantica:
+def?(Vacio_{σ,τ},V) -> False
+def?(definir(V,U,W),U') -> if U == U' then True else False
 ```
 ### c. Mostrar paso por paso como reduce la expresión:  
 (suponer que zero == zero -> True)  
 (λd:Dicc(Nat,Bool). if def?(d,0) then obtener(d,0) else False) definir($Vacio_{Nat,Bool}$,0,True). 
 ```
+(λd:Dicc(Nat,Bool). if def?(d,0) then obtener(d,0) else False) definir(Vacio_{Nat,Bool},0,True)
+{B}
+(if def?(d,0) then obtener(d,0) else False){d := definir(Vacio_{Nat,Bool},0,True)}
+if def?(definir(Vacio_{Nat,Bool},0,True),0) then obtener(definir(Vacio_{Nat,Bool},0,True),0) else False
+{definir}
 ```
