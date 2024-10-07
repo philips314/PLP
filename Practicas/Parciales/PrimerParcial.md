@@ -177,6 +177,33 @@ Caso 2: `r == y = True`
 Por HI tengo que esPreRama t xs ⇒ legth xs ≤ altura t. Por lo tanto...
 True
 ```
+## III.  
+Demostracion de propiedades.  
+Considerar las siguientes definiciones sobre árboles con informacion en las hojas.  
+```
+data AIH a = Hoja a | Bin (AIH a) (AIH a)
+
+{E0} esHoja (Hoja x) = True
+{E1} esHoja (Bin i d) = False
+
+{I} izq (Bin i d) = i
+
+{D} der (Bin i d) = d
+
+{M0} mismaEstructura (Hoja x) = esHoja
+{M1} mismaEstructura (Bin i d) = \t -> not (esHoja t) && mismaEstructura i (izq t) && mismaEstructura d (der t)
+```
+### a. Demostrar:  
+`∀t::AIH a. ∀u:: AIH a. mismaEstuctura t u = mismaEstuctura u t`
+### b. Usar el algoritmo W para inferir juicios de tipado validos.    
+(λx.x(λx.Succ(x)))(λx.x)  
+```
+asd
+```
+λx.if isZero(x) then x else x zero
+```
+asd
+```
 # Calculo Lambda Tipado.    
 ## I.
 Se desea modelar Diccionarios, para eso se extienden los tipos y expresiones de la siguiente manera:  
@@ -232,5 +259,31 @@ obtener(definir(Vacio_{Nat,Bool},0,True),0)
 if 0 == 0 then True else obtener(Vacio_{Nat,Bool}, 0)
 {== ; if}
 True
+```  
+## II.  
+Se desea modelar Árboles con informacion, para eso se extienden los tipos y expresiones de la siguiente manera:  
+τ ::= . . . | AIH(τ)  
+M ::= . . . | Hoja(M) | Bin(M,M) | case M of Hoja x ->> M; Bin(i,d) ->> M
+* AIH(τ) es el tipo de los arboles con informacion en las hojas de tipo τ.  
+* Hoja(M) es un arbol compuesto por una unica hoja con informacion M.
+* Bin(M1,M2) es una arbol compuesto por dos subarboles M1 y M2.  
+* El obs case M of Hoja x ->> M1; Bin(i,d) ->> M2 permite acceder al valor de un árbol que es hoja
+  (el cual se ligará a la variable x que puede aparecer libre en M2), y a los dos subárboles de un arbol que no es hoja (los cuales se ligarán a las variables i y d que pueden aparecer libres en M3)
+### a. Introducir las reglas de tipado para la extensión propuesta.  
 ```
-## II.
+asd
+```
+### b. Definir el conjunto de valores y las nuevas reglas de semántica operacional a pequeños pasos (congruencia y computo).   
+```
+asd
+```
+### c. Mostrar paso por paso como reduce la expresión:  
+case(λn: Nat. Hoja(n)) Succ(zero) of Hoja x ->> Succ(Pred(x)); Bin(i,d) ->> zero
+```
+asd
+```
+### d. Definir como macro:  
+La funcion $esHoja_{τ}$, que toma un AIH(τ) y devuelve un booleano que indica si es una hoja.  
+```
+asd
+```
