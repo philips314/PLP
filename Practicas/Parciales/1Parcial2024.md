@@ -204,8 +204,10 @@ M ::= . . . | $Vacio_{σ,τ}$ | definir(M,M,M) | def?(M,M) | obtener(M,M)
 ```
 V ::= ... | Vacio_{σ,τ} | definir(V,V,V)
 Reglas de semantica:
-def?(Vacio_{σ,τ},V) -> False
-def?(definir(V,U,W),U') -> if U == U' then True else False
+def?(Vacio_{σ,τ},V) -> False {DEFv}
+def?(definir(V,U,W),U') -> if U == U' then True else def?(V,U') [DEFd]
+obtener(Vacio_{σ,τ}, U) -> obtener(Vacio_{σ,τ}, U) //Se cuelga {OBTv}
+obtener(definir(V,U,W),U') -> if U == U' then W else obtener(V,U') {OBTd}
 ```
 ### c. Mostrar paso por paso como reduce la expresión:  
 (suponer que zero == zero -> True)  
@@ -214,6 +216,16 @@ def?(definir(V,U,W),U') -> if U == U' then True else False
 (λd:Dicc(Nat,Bool). if def?(d,0) then obtener(d,0) else False) definir(Vacio_{Nat,Bool},0,True)
 {B}
 (if def?(d,0) then obtener(d,0) else False){d := definir(Vacio_{Nat,Bool},0,True)}
+{sustitucion}
 if def?(definir(Vacio_{Nat,Bool},0,True),0) then obtener(definir(Vacio_{Nat,Bool},0,True),0) else False
 {definir}
+if (if 0 == 0 then True else def?(Vacio_{Nat,Bool}, 0)) then obtener(definir(Vacio_{Nat,Bool},0,True),0) else False
+{== ; if}
+if True then obtener(if 0 == 0 then True else obtener(definir(Vacio_{Nat,Bool},0,True),0) else False
+{if}
+obtener(definir(Vacio_{Nat,Bool},0,True),0)
+{OBTd}
+if 0 == 0 then True else obtener(Vacio_{Nat,Bool}, 0)
+{== ; if}
+True
 ```
