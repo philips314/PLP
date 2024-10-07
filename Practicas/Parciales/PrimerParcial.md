@@ -271,16 +271,44 @@ M ::= . . . | Hoja(M) | Bin(M,M) | case M of Hoja x ->> M; Bin(i,d) ->> M
   (el cual se ligará a la variable x que puede aparecer libre en M2), y a los dos subárboles de un arbol que no es hoja (los cuales se ligarán a las variables i y d que pueden aparecer libres en M3)
 ### a. Introducir las reglas de tipado para la extensión propuesta.  
 ```
-asd
+Γ ⊢ M: τ
+---------------------- t-Hoja
+Γ ⊢ Hoja(M): AIH(τ)
+
+Γ ⊢ M1: AIH(τ)      Γ ⊢ M2: AIH(τ)
+------------------------------------ t-Bin
+Γ ⊢ Bin(M1,M2): AIH(τ)
+
+Γ ⊢ M: AIH(τ)         Γ ⊢ M1: AIH(τ)      Γ ⊢ i, d, M2: AIH(τ)
+----------------------------------------------------------------- t-Bin
+Γ ⊢ case M of Hoja x ->> M1; Bin(i,d) ->> M2
 ```
 ### b. Definir el conjunto de valores y las nuevas reglas de semántica operacional a pequeños pasos (congruencia y computo).   
 ```
-asd
+V := ... | Hoja(V) | Bin(V,V)
+Reglas de computo.
+case Hoja(V) of Hoja x ->> M1; Bin(i,d) ->> M2 => M1{x := V} {Case1}
+case Bin(V1,V2) of Hoja x ->> M1; Bin(i,d) ->> M2 => M2{i := V1}{d := V2} {Case2}
+Reglas de congruencia.
+      M -> M'
+--------------------- cg-H
+Hoja(M) -> Hoja(M')
+
+      M1 -> M1'
+-------------------------- cg-B1
+Bin(M1,M2) -> Bin(M1',M2)
+
+      M2 -> M2'
+-------------------------- cg-B2
+Bin(V1,M2) -> Bin(V1,M2')
+                                       M -> M'
+----------------------------------------------------------------------------------------- cg-C
+case M of Hoja x ->> M1; Bin(i,d) ->> M2 -> case M' of Hoja x ->> M1; Bin(i,d) ->> M2
 ```
 ### c. Mostrar paso por paso como reduce la expresión:  
 case(λn: Nat. Hoja(n)) Succ(zero) of Hoja x ->> Succ(Pred(x)); Bin(i,d) ->> zero
 ```
-asd
+case(λn: Nat. Hoja(n)) Succ(zero) of Hoja x ->> Succ(Pred(x)); Bin(i,d) ->> zero 
 ```
 ### d. Definir como macro:  
 La funcion $esHoja_{τ}$, que toma un AIH(τ) y devuelve un booleano que indica si es una hoja.  
