@@ -1,4 +1,41 @@
 # Programacion funcional.  
+## I.  
+El siguiente tipo de datos sirve para representar árboles ternarios:  
+data AT a = NilT | Tri a (AT a) (AT a) (AT a)  
+Definimos el siguiente árbol para los ejemplos:  
+at1 = Tri | (Tri 2 NilT NilT NilT) (Tri 3 (Tri 4 NilT NilT NilT) NilT NilT) (Tri 5 NilT NilT Nilt)  
+
+### a. Dar el tipo y definir la funcion foldAT que implementa el esquema de recursion estructural para el tipo AT a (se permite el uso de recursión explicita).  
+```
+foldAT :: b -> (a -> b -> b -> b -> b) -> AT a -> b
+foldAT cNil cTri t = case t of
+                   NilT -> cNil
+                   Tri x izq mid der -> cTri x (rec izq) (rec mid) (rec der)
+                              where rec = foldAT cNil cTri
+```
+Donde:  
+```
+cNil: Valor que retorna cuando el arbol es NilT.
+cTri: Funcion que toma el valor de un nodo y los resultados de los 3 hijos, y devuelve un valor de tipo b.
+```
+### b. Definir la funcion preorder :: AT a -> [a].  
+Esta funcion lista los nodos de un arbol AT en el orden que aparecen: Primero la raiz, luego los nodos del subarbol izq, despues los del medio y finalmente los del derecho.  
+```
+preorder :: AT a -> [a]
+preorder = foldAT [] (\x rizq rmid rder -> x : rizq ++ rmid ++ rder)
+```
+### c. Definir la funcion mapAT :: (a -> b) -> AT a -> AT b.  
+Análoga a la funcion map para listas, pero para árboles AT.  
+```
+mapAT :: (a -> b) -> AT a -> AT b
+mapAT f = foldAT (NilT) (\x rizq rmid rder -> Tri (f x) rizq rmid rder)
+```
+### d. Definir la funcion nivel :: AT a -> Int -> [a].  
+Devuelve la lista de nodos del nivel correspondiente del árbol, siendo 0 el nivel de la raíz.  
+```
+nivel :: AT a -> Int -> [a]
+nivel = foldAT (const []) (\x rizq rmid rder -> \n -> if n == 0 then [x] else ((rizq (n-1)) ++ (rmid (n-1)) ++ (rder (n-1)) )) 
+```
 
 # Demostración e inferencia.  
 ## I.  
