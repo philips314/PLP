@@ -306,9 +306,17 @@ Bin(V1,M2) -> Bin(V1,M2')
 case M of Hoja x ->> M1; Bin(i,d) ->> M2 -> case M' of Hoja x ->> M1; Bin(i,d) ->> M2
 ```
 ### c. Mostrar paso por paso como reduce la expresión:  
-case(λn: Nat. Hoja(n)) Succ(zero) of Hoja x ->> Succ(Pred(x)); Bin(i,d) ->> zero
+case (λn: Nat. Hoja(n)) Succ(zero) of Hoja x ->> Succ(Pred(x)); Bin(i,d) ->> zero
 ```
-case(λn: Nat. Hoja(n)) Succ(zero) of Hoja x ->> Succ(Pred(x)); Bin(i,d) ->> zero 
+case ((λn: Nat. Hoja(n)) Succ(zero)) of Hoja x ->> Succ(Pred(x)); Bin(i,d) ->> zero -> {cg-C}
+
+(λn: Nat. Hoja(n)) Succ(zero) -> {B}
+Hoja(Succ(Zero))
+
+case Hoja(Succ(Zero)) of Hoja x ->> Succ(Pred(x)); Bin(i,d) ->> zero -> {Case1}
+Succ(Pred(x)){x := Succ(Zero)}
+Succ(Pred(Succ(Zero))) -> {succ ; pred}
+Succ(Zero)
 ```
 ### d. Definir como macro:  
 La funcion $esHoja_{τ}$, que toma un AIH(τ) y devuelve un booleano que indica si es una hoja.  
