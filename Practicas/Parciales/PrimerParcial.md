@@ -259,16 +259,7 @@ mismaEstructura left izquierda && mismaEstructura right derecha
 Hacemos algo similar del otro lado, y me queda...
 mismaEstructura left izquierda && mismaEstructura right derecha = mismaEstructura izquierda left && mismaEstructura derecha right.
 Esto vale por HI. Por lo tanto, la propiedad vale.
-```
-### b. Usar el algoritmo W para inferir juicios de tipado validos.    
-(λx.x(λx.Succ(x)))(λx.x)  
-```
-asd
-```
-λx.if isZero(x) then x else x zero
-```
-asd
-```
+```  
 # Calculo Lambda Tipado.    
 ## I.
 Se desea modelar Diccionarios, para eso se extienden los tipos y expresiones de la siguiente manera:  
