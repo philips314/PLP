@@ -194,7 +194,72 @@ data AIH a = Hoja a | Bin (AIH a) (AIH a)
 {M1} mismaEstructura (Bin i d) = \t -> not (esHoja t) && mismaEstructura i (izq t) && mismaEstructura d (der t)
 ```
 ### a. Demostrar:  
-`∀t::AIH a. ∀u:: AIH a. mismaEstuctura t u = mismaEstuctura u t`
+`∀t::AIH a. ∀u:: AIH a. mismaEstuctura t u = mismaEstuctura u t`  
+Hago induccion sobre t, defino:  
+P(t): `∀u:: AIH a. mismaEstuctura t u = mismaEstuctura u t`  
+Quiero ver que si se cumple: `∀n::a. P(Hoja n) ∧ (∀i::AIH a. ∀d:: AIH a. P(i) ∧ P(d))` -> `P(Bin i d)`  
+entonces `∀t::AIH a. P(t)`  
+Caso base: `P(Hoja n)`  
+```
+mismaEstuctura (Hoja n) u = mismaEstuctura u (Hoja n) {M0}
+esHoja u = mismaEstructura u (Hoja n)
+...
+Por lo visto debajo, P(Hoja n) vale
+```
+Por extensionalidad sobre u, hay dos casos:
+Caso 1: `u = Hoja m`  
+```
+esHoja u = mismaEstructura u (Hoja n) {Caso 1}
+True = mismaEstructura (Hoja u) (Hoja n) {M0}
+True = esHoja (Hoja n) {E0}
+True = True
+```
+Caso 2: `u = Bin izq der`  
+```
+esHoja u = mismaEstructura u (Hoja n) {Caso 2}
+esHoja (Bin izq der) = mismaEstructura (Bin izquierda derecha) (Hoja n) {E1}
+False = mismaEstructura (Bin izquierda derecha) (Hoja n) {M1}
+False = (\t -> not (esHoja t) && mismaEstructura izquierda (izq t) && mismaEstructura derecha (der t)) (Hoja n) {B}
+False =  (not (esHoja (Hoja n)) && mismaEstructura izquierda (izq (Hoja n)) && mismaEstructura derecha (der (Hoja n))) {E0 ; not ; &&}
+False = False
+```
+Caso inductivo:  
+Asumo que P(izq) ∧ P(der): `∀u::AIH a. (mismaEstructura izq u = mismaEstructura u izq)  ∧ (mismaEstructura der u = mismaEstructura u der)`  
+Sigo con P(Bin izq der):  
+```
+mismaEstructura (Bin izquierda derecha) u = mismaEstructura u (Bin izquierda derecha) {M1}
+(\t -> not (esHoja t) && mismaEstructura izquierda (izq t) && mismaEstructura derecha (der t)) u = mismaEstructura u (Bin izquierda derecha)
+```
+Por extensionalidad sobre u, hay dos casos:  
+Caso 1: `u = Hoja m`  
+```
+(\t -> not (esHoja t) && mismaEstructura izquierda (izq t) && mismaEstructura derecha (der t)) u = mismaEstructura u (Bin izquierda derecha) {Caso1}
+(\t -> not (esHoja t) && mismaEstructura izquierda (izq t) && mismaEstructura derecha (der t)) (Hoja m) = mismaEstructura (Hoja m) (Bin izquierda derecha) {B}
+not (esHoja (Hoja m)) && mismaEstructura izquierda (izq (Hoja m)) && mismaEstructura derecha (der (Hoja m)) = mismaEstructura (Hoja m) (Bin izquierda derecha) {E0 ; not ; &&}
+False = mismaEstructura (Hoja m) (Bin izquierda derecha) {M0}
+False = esHoja (Bin izquierda derecha) {E1}
+False = False
+```
+Caso 2: `u = Bin izq der`  
+```
+(\t -> not (esHoja t) && mismaEstructura izquierda (izq t) && mismaEstructura derecha (der t)) u  = mismaEstructura u (Bin izquierda derecha) {Caso2}
+(\t -> not (esHoja t) && mismaEstructura izquierda (izq t) && mismaEstructura derecha (der t)) (Bin izquierda derecha) = mismaEstructura (Bin izq der) (Bin izquierda derecha) {B}
+not (esHoja (Bin izquierda derecha)) && mismaEstructura izquierda (izq (Bin izquierda derecha)) && mismaEstructura derecha (der (Bin izquierda derecha)) = mismaEstructura (Bin izq der) (Bin izquierda derecha) {E1 ; not ; &&}
+mismaEstructura izquierda (izq (Bin izquierda derecha)) && mismaEstructura derecha (der (Bin izquierda derecha)) = mismaEstructura (Bin izq der) (Bin izquierda derecha) {I ; D}
+
+Sea (Bin izquierda derecha), izquierda = left y (Bin izquierda derecha), derecha = right
+
+mismaEstructura izquierda left && mismaEstructura derecha right = mismaEstructura (Bin left right) (Bin izquierda derecha)
+
+mismaEstructura (Bin left right) (Bin izquierda derecha): {M1 ; B}
+(not (esHoja (Bin izquierda derecha)) && mismaEstructura i (izq (Bin izquierda derecha)) && mismaEstructura d (der (Bin izquierda derecha))) {E1 ; not ; &&}
+mismaEstructura left (izq (Bin izquierda derecha)) && mismaEstructura right (der (Bin izquierda derecha)) {izq ; der}
+mismaEstructura left izquierda && mismaEstructura right derecha
+
+Hacemos algo similar del otro lado, y me queda...
+mismaEstructura left izquierda && mismaEstructura right derecha = mismaEstructura izquierda left && mismaEstructura derecha right.
+Esto vale por HI. Por lo tanto, la propiedad vale.
+```
 ### b. Usar el algoritmo W para inferir juicios de tipado validos.    
 (λx.x(λx.Succ(x)))(λx.x)  
 ```
